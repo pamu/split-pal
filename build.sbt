@@ -15,7 +15,7 @@ name := """split-pal"""
 
 organization := "com.splitpal"
 
-organizationName := "Split Pal"
+organizationName := "rxbytes"
 
 organizationHomepage := Some(new URL("http://pamu.github.io"))
 
