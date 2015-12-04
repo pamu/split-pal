@@ -13,7 +13,7 @@ platformTarget in Android := Versions.androidPlatformV
 
 name := """split-pal"""
 
-organization := "com.splitpal"
+organization := "com.rxbytes"
 
 organizationName := "rxbytes"
 
@@ -47,8 +47,8 @@ libraryDependencies ++= Seq(
 
 apkSigningConfig in Android := Option(
   PromptPasswordsSigningConfig(
-    keystore = new File(Path.userHome.absolutePath + "/.android/spli-pal.keystore"),
-    alias = "split-pal"))
+    keystore = new File(Path.userHome.absolutePath + "/.android/rxbytes.keystore"),
+    alias = "rxbytes"))
 
 run <<= run in Android
 
