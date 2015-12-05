@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Split Pal</string>
+    <string name="screen_1">Screen 1</string>
+    <string name="screen_2">Screen 2</string>
+    <string name="screen_3">Screen 3</string>
 </resources>

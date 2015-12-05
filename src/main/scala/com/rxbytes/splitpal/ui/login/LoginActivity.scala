@@ -1,7 +1,9 @@
 package com.rxbytes.splitpal.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.rxbytes.splitpal.ui.main.MainActivity
 import macroid.{IdGeneration, Contexts}
 
 /**
@@ -16,6 +18,8 @@ class LoginActivity
   protected override def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
     setContentView(layout)
+    finish()
+    startActivity(new Intent(getApplication, classOf[MainActivity]))
   }
 
 }

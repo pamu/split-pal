@@ -2,6 +2,7 @@ package com.rxbytes.splitpal.ui.login
 
 import android.widget.{TextView, LinearLayout}
 import com.fortysevendeg.macroid.extras.TextTweaks._
+import com.rxbytes.splitpal.ui.commons.ToolbarLayout
 import macroid.ActivityContextWrapper
 import macroid.FullDsl._
 
