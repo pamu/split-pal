@@ -66,9 +66,15 @@ object Libraries {
     lazy val json4s = "org.json4s" %% "json4s-native" % Versions.json4sV
   }
 
+  object parse {
+    lazy val parse = "com.parse" % "parse-android" % Versions.parse
+    lazy val parseBolts = "com.parse.bolts" % "bolts-android" % Versions.parseBolts
+  }
+
   object test {
     lazy val specs2 = "org.specs2" %% "specs2-core" % Versions.specs2V % "test"
     lazy val androidTest = "com.google.android" % "android" % "4.1.1.4" % "test"
     lazy val mockito = "org.specs2" % "specs2-mock_2.11" % Versions.mockitoV % "test"
   }
+
 }

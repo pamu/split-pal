@@ -150,9 +150,6 @@
 # view res/layout/abc_screen_simple.xml #generated:17
 -keep class android.support.v7.internal.widget.FitWindowsLinearLayout { <init>(...); }
 
-# view v11/res/layout-v11/abc_screen_content_include.xml #generated:19
--keep class android.support.v7.internal.widget.NativeActionModeAwareLayout { <init>(...); }
-
 # view res/layout/abc_action_mode_close_item_material.xml #generated:17
 # view res/layout/abc_search_dropdown_item_icons_2line.xml #generated:27
 # view res/layout/abc_search_dropdown_item_icons_2line.xml #generated:37
@@ -174,13 +171,10 @@
 # view res/layout/abc_search_view.xml #generated:78
 -keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
 
-# view AndroidManifest.xml #generated:14
--keep class android.support.v7.widget.TestActivity { <init>(...); }
-
 # view res/layout/abc_screen_toolbar.xml #generated:36
 -keep class android.support.v7.widget.Toolbar { <init>(...); }
 
-# view AndroidManifest.xml #generated:19
+# view AndroidManifest.xml #generated:18
 -keep class android.test.InstrumentationTestRunner { <init>(...); }
 
 # view AndroidManifest.xml #generated:7
