@@ -184,7 +184,7 @@
 -keep class android.test.InstrumentationTestRunner { <init>(...); }
 
 # view AndroidManifest.xml #generated:7
--keep class com.typesoft.splitpal.ui.login.LoginActivity { <init>(...); }
+-keep class com.rxbytes.splitpal.ui.login.LoginActivity { <init>(...); }
 
 # view res/layout/abc_action_menu_item_layout.xml #generated:17
 -keep class android.support.v7.internal.view.menu.ActionMenuItemView { <init>(...); }
