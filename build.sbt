@@ -3,7 +3,7 @@ import Libraries.macroid._
 import Libraries.playServices._
 import Libraries.apacheCommons._
 import Libraries.json._
-import Libraries.parse._
+//import Libraries.parse._
 import Libraries.test._
 import android.Keys._
 import android.PromptPasswordsSigningConfig
@@ -41,8 +41,8 @@ libraryDependencies ++= Seq(
   aar(playServicesBase),
   apacheCommonsLang,
   json4s,
-  parse,
-  parseBolts,
+//  parse,
+//  parseBolts,
   specs2,
   mockito,
   androidTest,
