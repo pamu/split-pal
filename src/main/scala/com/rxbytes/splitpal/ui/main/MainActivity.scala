@@ -9,6 +9,7 @@ import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.ui.commons.SlidingTabLayout.TabColorizer
 import macroid.Contexts
 import com.fortysevendeg.macroid.extras.ViewPagerTweaks._
+import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import macroid.FullDsl._
 
 /**
@@ -32,7 +33,7 @@ class MainActivity
     slidingTabLayout.map(_.setDistributeEvenly(true))
 
     slidingTabLayout.map(_.setCustomTabColorizer(new TabColorizer {
-      override def getIndicatorColor(position: Int): Int = getResources.getColor(R.color.colorPrimary)
+      override def getIndicatorColor(position: Int): Int = resGetColor(R.color.white)
     }))
 
     slidingTabLayout.map(_.setViewPager(viewPager.get))
@@ -48,7 +49,7 @@ class MainActivity
       }
 
     }))
-    
+
   }
 
   override def onCreateOptionsMenu(menu: Menu): Boolean = super.onCreateOptionsMenu(menu)
