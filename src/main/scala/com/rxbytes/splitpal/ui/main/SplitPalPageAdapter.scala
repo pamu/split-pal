@@ -1,16 +1,16 @@
 package com.rxbytes.splitpal.ui.main
 
 import android.os.Bundle
-import android.support.v4.app.{FragmentPagerAdapter, FragmentManager, Fragment}
+import android.support.v4.app.{FragmentStatePagerAdapter, FragmentManager, Fragment}
 import com.rxbytes.splitpal.R
-import com.rxbytes.splitpal.ui.main.fragment.{Fragments, ContactsFragment}
+import com.rxbytes.splitpal.ui.main.fragments.contacts.{Fragments, ContactsFragment}
 import macroid.ContextWrapper
 
 /**
   * Created by pnagarjuna on 05/12/15.
   */
 class SplitPalPageAdapter(fragmentManager: FragmentManager)(implicit contextWrapper: ContextWrapper)
-  extends FragmentPagerAdapter(fragmentManager) {
+  extends FragmentStatePagerAdapter(fragmentManager) {
 
   val screens = Screens.screens
 
@@ -32,7 +32,7 @@ object Screens {
   def screens(implicit contextWrapper: ContextWrapper) = List(
     Screen(contextWrapper.application.getString(R.string.screen_1)),
     Screen(contextWrapper.application.getString(R.string.screen_2)),
-    Screen(contextWrapper.application.getString(R.string.screen_3))
+    Screen(contextWrapper.application.getString(R.string.contacts))
   )
 
 }

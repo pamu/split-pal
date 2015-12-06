@@ -1,7 +1,7 @@
-package com.rxbytes.splitpal.ui.main.fragment.layouts
+package com.rxbytes.splitpal.ui.main.fragments.contacts.layouts
 
 import android.widget.{LinearLayout, TextView}
-import com.rxbytes.splitpal.ui.main.fragment.styles.ContactsStyle
+import com.rxbytes.splitpal.ui.main.fragments.contacts.styles.ContactsStyle
 import macroid.ContextWrapper
 import macroid.FullDsl._
 

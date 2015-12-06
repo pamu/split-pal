@@ -1,4 +1,4 @@
-package com.rxbytes.splitpal.ui.main.fragment.styles
+package com.rxbytes.splitpal.ui.main.fragments.contacts.styles
 
 import android.view.Gravity
 import android.widget.TextView

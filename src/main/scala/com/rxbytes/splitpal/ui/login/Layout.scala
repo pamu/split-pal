@@ -10,10 +10,12 @@ import macroid.FullDsl._
   * Created by pnagarjuna on 04/12/15.
   */
 trait Layout
-  extends Styles {
+  extends Styles
+  with ToolbarLayout {
 
   def layout(implicit activityContextWrapper: ActivityContextWrapper) = getUi(
     l[LinearLayout](
+      toolBarLayout(),
       w[TextView] <~ tvText("Hello")
     )
   )
