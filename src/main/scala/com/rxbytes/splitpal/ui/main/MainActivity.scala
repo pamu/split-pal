@@ -1,6 +1,7 @@
 package com.rxbytes.splitpal.ui.main
 
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.ui.commons.SlidingTabLayout.TabColorizer
@@ -23,6 +24,20 @@ class MainActivity
     val adapter = new SplitPalPageAdapter(getSupportFragmentManager)
 
     runUi(viewPager <~ vpAdapter(adapter))
+
+    runUi(viewPager <~ vpOnPageChangeListener(new ViewPager.OnPageChangeListener {
+
+      override def onPageScrollStateChanged(i: Int): Unit = {}
+
+      override def onPageScrolled(i: Int, v: Float, i1: Int): Unit = {
+        runUi(toast(s"i value scrolled $i") <~ fry)
+      }
+
+      override def onPageSelected(i: Int): Unit = {
+        runUi(toast(s"i value selected $i") <~ fry)
+      }
+
+    }))
 
     slidingTabLayout.map(_.setDistributeEvenly(true))
 
