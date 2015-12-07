@@ -2,14 +2,17 @@ package com.rxbytes.splitpal.ui.main.fragments.contacts
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.{LinearLayoutManager, GridLayoutManager}
 import android.util.Log
 import android.view._
-import com.fortysevendeg.macroid.extras.TextTweaks._
+import com.fortysevendeg.macroid.extras.DeviceMediaQueries._
 import com.rxbytes.splitpal.R
+import com.rxbytes.splitpal.ui.commons.ListItemDecorator
 import com.rxbytes.splitpal.ui.main.Screens
 import com.rxbytes.splitpal.ui.main.fragments.contacts.layouts.ContactsLayout
 import macroid.Contexts
 import macroid.FullDsl._
+import com.fortysevendeg.macroid.extras.RecyclerViewTweaks._
 
 /**
   * Created by pnagarjuna on 05/12/15.
@@ -27,7 +30,30 @@ class ContactsFragment
     val element = getArguments.getInt(Fragments.fragmentId)
     val screen = screens(element)
     val cLayout = new ContactsLayout
-    runUi(cLayout.title <~ tvText(screen.title))
+    //runUi(cLayout.title <~ tvText(screen.title))
+    //cLayout.layout
+    val adapter = new ContactsListRecyclerAdapter(
+      Seq(
+        Contact(1, "Hello",
+          "PAMU NAGARJUNA",
+          "Scala is a functional and object oriented programming language. Scala features include mixin composition using traits",
+          1000, 1000)
+      )
+    )(contact => Unit)
+
+    val layoutManager =
+      landscapeTablet ?
+        new GridLayoutManager(getActivity, 3) |
+        tablet ?
+          new GridLayoutManager(getActivity, 2) | new LinearLayoutManager(getActivity)
+
+    runUi(
+      cLayout.contactsList <~
+        rvLayoutManager(layoutManager) <~
+        rvAddItemDecoration(new ListItemDecorator) <~
+        rvAdapter(adapter)
+    )
+
     cLayout.layout
   }
 

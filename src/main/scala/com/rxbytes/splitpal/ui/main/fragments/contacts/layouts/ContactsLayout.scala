@@ -1,6 +1,7 @@
 package com.rxbytes.splitpal.ui.main.fragments.contacts.layouts
 
-import android.widget.{LinearLayout, TextView}
+import android.support.v7.widget.RecyclerView
+import android.widget.{FrameLayout, TextView}
 import com.rxbytes.splitpal.ui.main.fragments.contacts.styles.ContactsStyle
 import macroid.ContextWrapper
 import macroid.FullDsl._
@@ -12,10 +13,12 @@ class ContactsLayout(implicit contextWrapper: ContextWrapper)
   extends ContactsStyle {
 
   var title = slot[TextView]
+  var contactsList = slot[RecyclerView]
 
   val content = getUi(
-    l[LinearLayout](
-      w[TextView] <~ wire(title) <~ textStyle
+    l[FrameLayout](
+      w[TextView] <~ wire(title) <~ textStyle,
+      w[RecyclerView] <~ wire(contactsList) <~ contactsListStyle
     ) <~ contactsContentStyle
   )
 
