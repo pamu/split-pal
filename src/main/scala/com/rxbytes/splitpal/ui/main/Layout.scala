@@ -21,9 +21,10 @@ trait Layout
 
   def layout(implicit activityContextWrapper: ActivityContextWrapper) = getUi(
     l[LinearLayout](
-      toolBarLayout(),
-      l[SlidingTabLayout]() <~ wire(slidingTabLayout) <~ slidingTabLayoutStyle,
-      l[ViewPager]() <~ wire(viewPager) <~ viewPagerStyle <~ id(Id.pager)
+      //toolBarLayout(),
+      toolBarLayout,
+      w[SlidingTabLayout]() <~ wire(slidingTabLayout) <~ slidingTabLayoutStyle,
+      w[ViewPager]() <~ wire(viewPager) <~ viewPagerStyle <~ id(Id.pager)
     ) <~ contentStyle
   )
 

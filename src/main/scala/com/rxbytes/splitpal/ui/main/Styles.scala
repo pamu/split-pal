@@ -12,7 +12,7 @@ trait Styles
   extends ToolbarStyles {
 
   def viewPagerStyle(implicit activityContextWrapper: ActivityContextWrapper) =
-    vMatchParent
+    llMatchWeightVertical
 
   def contentStyle(implicit activityContextWrapper: ActivityContextWrapper) =
     llVertical

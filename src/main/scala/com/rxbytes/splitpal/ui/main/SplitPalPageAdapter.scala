@@ -30,8 +30,8 @@ class SplitPalPageAdapter(fragmentManager: FragmentManager)(implicit contextWrap
 object Screens {
 
   def screens(implicit contextWrapper: ContextWrapper) = List(
-    Screen(contextWrapper.application.getString(R.string.screen_1)),
-    Screen(contextWrapper.application.getString(R.string.screen_2)),
+    Screen(contextWrapper.application.getString(R.string.flows)),
+    Screen(contextWrapper.application.getString(R.string.events)),
     Screen(contextWrapper.application.getString(R.string.contacts))
   )
 

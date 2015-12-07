@@ -15,9 +15,9 @@ trait Layout
 
   def layout(implicit activityContextWrapper: ActivityContextWrapper) = getUi(
     l[LinearLayout](
-      toolBarLayout(),
+      toolBarLayout,
       w[TextView] <~ tvText("Hello")
-    )
+    ) <~ contentStyle
   )
 
 }

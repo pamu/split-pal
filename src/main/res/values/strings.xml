@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Split Pal</string>
-    <string name="screen_1">Screen 1</string>
-    <string name="screen_2">Screen 2</string>
+    <string name="flows">Flows</string>
+    <string name="events">Events</string>
     <string name="contacts">Contacts</string>
+
+    <string name="menu_search">Search</string>
 </resources>

@@ -12,9 +12,13 @@ import scala.language.postfixOps
 
 trait ToolbarStyles {
 
-  def toolbarStyle(height: Int)(implicit context: ContextWrapper): Tweak[Toolbar] =
-    vContentSizeMatchWidth(height) +
-      vBackground(R.color.colorPrimary)
+//  def toolbarStyle(height: Int)(implicit context: ContextWrapper): Tweak[Toolbar] =
+//    vContentSizeMatchWidth(height) +
+//      vBackground(R.color.colorPrimary)
+
+  val toolbarStyle =
+    vBackground(R.color.colorPrimary) +
+      vMatchWidth
 
 }
 

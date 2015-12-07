@@ -26,18 +26,14 @@ class MainActivity
     super.onCreate(savedInstanceState)
     setContentView(layout)
 
+    toolBar map setSupportActionBar
     val adapter = new SplitPalPageAdapter(getSupportFragmentManager)
-
     runUi(viewPager <~ vpAdapter(adapter))
-
     slidingTabLayout.map(_.setDistributeEvenly(true))
-
     slidingTabLayout.map(_.setCustomTabColorizer(new TabColorizer {
       override def getIndicatorColor(position: Int): Int = resGetColor(R.color.white)
     }))
-
     slidingTabLayout.map(_.setViewPager(viewPager.get))
-
     slidingTabLayout.map(_.setOnPageChangeListener(new ViewPager.OnPageChangeListener {
 
       override def onPageScrollStateChanged(i: Int): Unit = {}
