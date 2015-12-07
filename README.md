@@ -6,4 +6,4 @@ Discover friends by phone number from contacts, settle payments with paytm walle
 By Pamu and Sai
 
 
-thanks to 47deg.com [some of the code is taken from their open source projects on github]
+thanks to [47deg !] (http://47deg.com) [some of the code is taken from their open source projects on github]
