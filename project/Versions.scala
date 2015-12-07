@@ -13,4 +13,5 @@ object Versions {
   val apacheCommonsV = "3.3.2"
   val specs2V = "2.4.15"
   val mockitoV = "3.0-M2"
+  val picassoV = "2.5.0"
 }

@@ -15,7 +15,8 @@ trait ContactsStyle {
   def textStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
     vMatchParent +
     tvGravity(Gravity.CENTER) +
-    llLayoutGravity(Gravity.CENTER)
+    llLayoutGravity(Gravity.TOP) +
+    llLayoutGravity(Gravity.CENTER_HORIZONTAL)
 
   def contactsContentStyle(implicit contextWrapper: ContextWrapper) =
     vMatchParent +

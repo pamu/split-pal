@@ -66,6 +66,10 @@ object Libraries {
     lazy val json4s = "org.json4s" %% "json4s-native" % Versions.json4sV
   }
 
+  object graphics {
+    lazy val picasso = "com.squareup.picasso" % "picasso" % Versions.picassoV
+  }
+
   object test {
     lazy val specs2 = "org.specs2" %% "specs2-core" % Versions.specs2V % "test"
     lazy val androidTest = "com.google.android" % "android" % "4.1.1.4" % "test"
