@@ -53,16 +53,14 @@ case class ContactViewHolder(adapter: ContactLayoutAdapter)
   val profilePic = adapter.profilePic
   val profileName = adapter.profileName
   val profileStatus = adapter.profileStatus
-  val inflow = adapter.inflow
-  val outflow = adapter.outflow
+  val flow = adapter.flow
 
   def bind(contact: Contact): Unit = {
     val avatarSize = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
     runUi((profilePic <~ roundedImage(R.drawable.ic_launcher, R.drawable.ic_launcher, avatarSize)) ~
       (profileName <~ tvText(contact.name)) ~
       (profileStatus <~ tvText(contact.status)) ~
-      (inflow <~ tvText(s"+ ${contact.inflow}")) ~
-      (outflow <~ tvText(s"- ${contact.outflow}"))
+      (flow <~ (if (contact.flow > 0) tvText(s"owes you ${contact.flow}") else tvText(s"you owe ${contact.flow}")))
     )
   }
 
@@ -74,8 +72,7 @@ case class ContactLayoutAdapter(implicit activityContextWrapper: ActivityContext
   var profilePic = slot[ImageView]
   var profileName = slot[TextView]
   var profileStatus = slot[TextView]
-  var inflow = slot[TextView]
-  var outflow = slot[TextView]
+  var flow = slot[TextView]
 
   private def layout = getUi(
     l[CardView](
@@ -86,10 +83,7 @@ case class ContactLayoutAdapter(implicit activityContextWrapper: ActivityContext
             w[TextView] <~ wire(profileName) <~ profileNameStyle,
             w[TextView] <~ wire(profileStatus) <~ profileStatusStyle
           ) <~ profileTopContentStyle,
-          l[LinearLayout](
-            w[TextView] <~ wire(inflow) <~ inflowStyle,
-            w[TextView] <~ wire(outflow) <~ outflowStyle
-          ) <~ flowsStyle
+          w[TextView] <~ wire(flow) <~ flowStyle
         ) <~ profileContentStyle
       ) <~ contactContentStyle
     ) <~ cardStyle
@@ -117,6 +111,8 @@ trait ContactLayoutStyles {
       vMatchParent +
       tvBoldCondensed +
       tvColorResource(R.color.colorPrimary) +
+      tvMaxLines(1) +
+      tvEllipsize(TruncateAt.END) +
       tvText("Name")
 
   def profileStatusStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
@@ -127,9 +123,9 @@ trait ContactLayoutStyles {
       tvColorResource(R.color.colorPrimary) +
       llLayoutMargin(0,
         resGetDimensionPixelSize(R.dimen.padding_small),
-        resGetDimensionPixelSize(R.dimen.padding_medium),
+        resGetDimensionPixelSize(R.dimen.padding_tiny),
         resGetDimensionPixelSize(R.dimen.padding_small)) +
-      tvMaxLines(2) +
+      tvMaxLines(1) +
       tvEllipsize(TruncateAt.END) +
       tvText("Status")
 
@@ -139,38 +135,15 @@ trait ContactLayoutStyles {
   def profileContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
     llVertical
 
-  def inflowStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
-    tvGravity(Gravity.CENTER) +
-      llWrapWeightHorizontal +
-      tvColorResource(R.color.white) +
-      vBackground(R.drawable.inflow_amount) +
-      vMargin(0,
-        0,
-        resGetDimensionPixelSize(R.dimen.padding_small),
-        0) +
-      tvSize(4 sp) +
-      tvText("Inflow")
-
-  def outflowStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
-    tvGravity(Gravity.CENTER) +
-      llWrapWeightHorizontal +
-      tvColorResource(R.color.white) +
-      vBackground(R.drawable.outflow_amount) +
-      vMargin(resGetDimensionPixelSize(R.dimen.padding_small),
-        0,
-        resGetDimensionPixelSize(R.dimen.padding_large),
-        0) +
-      tvSize(4 sp) +
-      tvText("Outflow")
-
-  def flowsStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
-    llHorizontal +
-      vMatchWidth
-
   def contactContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
     vMatchWidth +
       llGravity(Gravity.CENTER) +
       llHorizontal
+
+  def flowStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
+    vWrapContent +
+      tvBoldItalic +
+      tvColorResource(R.color.colorPrimary)
 
 }
 
@@ -189,5 +162,4 @@ case class Contact(dbId: Long,
                    avatarLink: String,
                    name: String,
                    status: String,
-                   inflow: Int,
-                   outflow: Int)
+                   flow: Int)

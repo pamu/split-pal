@@ -37,7 +37,7 @@ class ContactsFragment
         Contact(1, "Hello",
           "PAMU NAGARJUNA",
           "Scala is a functional and object oriented programming language. Scala features include mixin composition using traits",
-          1000, 1000)
+          1000)
       )
     )(contact => Unit)
 

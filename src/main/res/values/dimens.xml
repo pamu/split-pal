@@ -3,9 +3,10 @@
     <dimen name="height_toolbar">56dp</dimen>
     <dimen name="padding_default">8dp</dimen>
     <dimen name="padding_small">2dp</dimen>
+    <dimen name="padding_tiny">8dp</dimen>
     <dimen name="padding_very_small">1dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
     <dimen name="padding_large">20dp</dimen>
-    <dimen name="main_list_avatar_size">90dp</dimen>
+    <dimen name="main_list_avatar_size">64dp</dimen>
     <dimen name="radius">3dp</dimen>
 </resources>
