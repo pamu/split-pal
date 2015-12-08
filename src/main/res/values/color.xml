@@ -9,6 +9,4 @@
     <color name="white">#ffffff</color>
     <color name="control_highlight">#ff49cb94</color>
     <color name="background_list_selector_pressed">#11000000</color>
-    <color name="outflow">#FF0000</color>
-    <color name="inflow">#00FF33</color>
 </resources>

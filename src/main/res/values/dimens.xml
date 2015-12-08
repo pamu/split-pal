@@ -8,5 +8,8 @@
     <dimen name="padding_medium">16dp</dimen>
     <dimen name="padding_large">20dp</dimen>
     <dimen name="main_list_avatar_size">64dp</dimen>
-    <dimen name="radius">3dp</dimen>
+
+    <!-- fonts -->
+    <dimen name="title_font">20sp</dimen>
+    <dimen name="status_font">16sp</dimen>
 </resources>

@@ -35,8 +35,8 @@ class ContactsFragment
     val adapter = new ContactsListRecyclerAdapter(
       Seq(
         Contact(1, "Hello",
-          "PAMU NAGARJUNA",
-          "Scala is a functional and object oriented programming language. Scala features include mixin composition using traits",
+          "Pamu Nagarjuna",
+          "hello",
           1000)
       )
     )(contact => Unit)

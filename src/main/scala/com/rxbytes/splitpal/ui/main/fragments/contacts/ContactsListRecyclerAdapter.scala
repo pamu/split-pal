@@ -53,14 +53,12 @@ case class ContactViewHolder(adapter: ContactLayoutAdapter)
   val profilePic = adapter.profilePic
   val profileName = adapter.profileName
   val profileStatus = adapter.profileStatus
-  val flow = adapter.flow
 
   def bind(contact: Contact): Unit = {
     val avatarSize = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
     runUi((profilePic <~ roundedImage(R.drawable.ic_launcher, R.drawable.ic_launcher, avatarSize)) ~
       (profileName <~ tvText(contact.name)) ~
-      (profileStatus <~ tvText(contact.status)) ~
-      (flow <~ (if (contact.flow > 0) tvText(s"owes you ${contact.flow}") else tvText(s"you owe ${contact.flow}")))
+      (profileStatus <~ (if (contact.flow > 0) tvText(s"owes you ${contact.flow}") else tvText(s"you owe ${contact.flow}")))
     )
   }
 
@@ -72,18 +70,14 @@ case class ContactLayoutAdapter(implicit activityContextWrapper: ActivityContext
   var profilePic = slot[ImageView]
   var profileName = slot[TextView]
   var profileStatus = slot[TextView]
-  var flow = slot[TextView]
 
   private def layout = getUi(
     l[CardView](
       l[LinearLayout](
         w[ImageView] <~ wire(profilePic) <~ profilePicStyle,
         l[LinearLayout](
-          l[LinearLayout](
-            w[TextView] <~ wire(profileName) <~ profileNameStyle,
-            w[TextView] <~ wire(profileStatus) <~ profileStatusStyle
-          ) <~ profileTopContentStyle,
-          w[TextView] <~ wire(flow) <~ flowStyle
+          w[TextView] <~ wire(profileName) <~ profileNameStyle,
+          w[TextView] <~ wire(profileStatus) <~ profileStatusStyle
         ) <~ profileContentStyle
       ) <~ contactContentStyle
     ) <~ cardStyle
@@ -102,48 +96,40 @@ trait ContactLayoutStyles {
     val size = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
     lp[LinearLayout](size, size) +
       ivScaleType(ScaleType.CENTER_CROP) +
-      llLayoutGravity(Gravity.CENTER_VERTICAL) +
-      vMargin(8 dp, 8 dp, 8 dp, 8 dp)
+      llLayoutGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT) +
+      vMargin(8 dp, 8 dp, 24 dp, 8 dp)
   }
 
   def profileNameStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
     llMatchWeightVertical +
       vMatchParent +
-      tvBoldCondensed +
+      tvSizeResource(R.dimen.title_font) +
       tvColorResource(R.color.colorPrimary) +
       tvMaxLines(1) +
-      tvEllipsize(TruncateAt.END) +
-      tvText("Name")
+      tvEllipsize(TruncateAt.END)
 
   def profileStatusStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
     llMatchWeightVertical +
       vMatchParent +
       tvNormalLight +
       tvItalicLight +
+      tvSizeResource(R.dimen.status_font) +
       tvColorResource(R.color.colorPrimary) +
       llLayoutMargin(0,
         resGetDimensionPixelSize(R.dimen.padding_small),
         resGetDimensionPixelSize(R.dimen.padding_tiny),
         resGetDimensionPixelSize(R.dimen.padding_small)) +
       tvMaxLines(1) +
-      tvEllipsize(TruncateAt.END) +
-      tvText("Status")
-
-  def profileTopContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
-    llVertical
+      tvEllipsize(TruncateAt.END)
 
   def profileContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
-    llVertical
+    llVertical +
+      llWrapWeightHorizontal
 
   def contactContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
     vMatchWidth +
       llGravity(Gravity.CENTER) +
       llHorizontal
-
-  def flowStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
-    vWrapContent +
-      tvBoldItalic +
-      tvColorResource(R.color.colorPrimary)
 
 }
 
