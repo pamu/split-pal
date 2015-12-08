@@ -4,6 +4,7 @@
     <string name="flows">Flows</string>
     <string name="events">Events</string>
     <string name="contacts">Contacts</string>
-
     <string name="menu_search">Search</string>
+    <string name="error">Error Loading</string>
+    <string name="empty">Contents Empty</string>
 </resources>

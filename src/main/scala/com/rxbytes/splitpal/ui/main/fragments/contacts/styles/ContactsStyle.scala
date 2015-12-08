@@ -2,13 +2,13 @@ package com.rxbytes.splitpal.ui.main.fragments.contacts.styles
 
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
-import android.widget.TextView
+import android.widget.{Button, TextView, LinearLayout, ProgressBar}
 import com.rxbytes.splitpal.R
 import macroid.{Tweak, ContextWrapper}
 import com.fortysevendeg.macroid.extras.ViewTweaks._
 import com.fortysevendeg.macroid.extras.FrameLayoutTweaks._
+import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
 import com.fortysevendeg.macroid.extras.TextTweaks._
-import macroid.FullDsl._
 import scala.language.postfixOps
 
 /**
@@ -16,13 +16,9 @@ import scala.language.postfixOps
   */
 trait ContactsStyle {
 
-  def textStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
+  def progressBarStyle(implicit contextWrapper: ContextWrapper): Tweak[ProgressBar] =
     vWrapContent +
-      tvColor(R.color.colorPrimary) +
-      tvBoldItalicCondensed +
-      tvSize(8 dp) +
-      tvGravity(Gravity.CENTER) +
-      flLayoutGravity(Gravity.CENTER) +
+      Tweak[ProgressBar](_.setIndeterminate(true)) +
       flLayoutGravity(Gravity.CENTER) +
       vGone
 
@@ -32,5 +28,22 @@ trait ContactsStyle {
 
   def contactsContentStyle(implicit contextWrapper: ContextWrapper) =
     flMatchWeightVertical
+
+  def placeholderContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
+    llVertical +
+      llGravity(Gravity.CENTER) +
+      vGone
+
+  def msgStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
+    vWrapContent +
+      tvSizeResource(R.dimen.status_font) +
+      tvColorResource(R.color.colorPrimary) +
+      llLayoutGravity(Gravity.CENTER) +
+      tvGravity(Gravity.CENTER)
+
+  def btnStyle(implicit contextWrapper: ContextWrapper): Tweak[Button] =
+    vWrapContent +
+      llLayoutGravity(Gravity.CENTER) +
+      tvText("Reload")
 
 }
