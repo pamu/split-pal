@@ -2,6 +2,7 @@ package com.rxbytes.splitpal.ui.main.fragments.contacts
 
 import android.support.v7.widget.{CardView, RecyclerView}
 import android.support.v7.widget.RecyclerView.ViewHolder
+import android.text.TextUtils.TruncateAt
 import android.util.Log
 import android.view.View.OnClickListener
 import android.view.{Gravity, View, ViewGroup}
@@ -60,8 +61,8 @@ case class ContactViewHolder(adapter: ContactLayoutAdapter)
     runUi((profilePic <~ roundedImage(R.drawable.ic_launcher, R.drawable.ic_launcher, avatarSize)) ~
       (profileName <~ tvText(contact.name)) ~
       (profileStatus <~ tvText(contact.status)) ~
-      (inflow <~ tvText(s"${contact.inflow}")) ~
-      (outflow <~ tvText(s"${contact.outflow}"))
+      (inflow <~ tvText(s"+ ${contact.inflow}")) ~
+      (outflow <~ tvText(s"- ${contact.outflow}"))
     )
   }
 
@@ -80,7 +81,7 @@ case class ContactLayoutAdapter(implicit activityContextWrapper: ActivityContext
     l[CardView](
       l[LinearLayout](
         w[ImageView] <~ wire(profilePic) <~ profilePicStyle,
-          l[LinearLayout](
+        l[LinearLayout](
           l[LinearLayout](
             w[TextView] <~ wire(profileName) <~ profileNameStyle,
             w[TextView] <~ wire(profileStatus) <~ profileStatusStyle
@@ -114,49 +115,61 @@ trait ContactLayoutStyles {
   def profileNameStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
     llMatchWeightVertical +
       vMatchParent +
-      tvBold +
-      vPadding(resGetDimensionPixelSize(R.dimen.padding_default),
-        resGetDimensionPixelSize(R.dimen.padding_default),
-        resGetDimensionPixelSize(R.dimen.padding_default),
-        resGetDimensionPixelSize(R.dimen.padding_default)) +
+      tvBoldCondensed +
+      tvColorResource(R.color.colorPrimary) +
       tvText("Name")
 
   def profileStatusStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
     llMatchWeightVertical +
       vMatchParent +
-      vPadding(resGetDimensionPixelSize(R.dimen.padding_default),
-        resGetDimensionPixelSize(R.dimen.padding_default),
-        resGetDimensionPixelSize(R.dimen.padding_default),
-        resGetDimensionPixelSize(R.dimen.padding_default)) +
-      tvMaxLines(1) +
+      tvNormalLight +
+      tvItalicLight +
+      tvColorResource(R.color.colorPrimary) +
+      llLayoutMargin(0,
+        resGetDimensionPixelSize(R.dimen.padding_small),
+        resGetDimensionPixelSize(R.dimen.padding_medium),
+        resGetDimensionPixelSize(R.dimen.padding_small)) +
+      tvMaxLines(2) +
+      tvEllipsize(TruncateAt.END) +
       tvText("Status")
 
   def profileTopContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
     llVertical
 
   def profileContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
-    llWrapWeightHorizontal +
-      llVertical
+    llVertical
 
   def inflowStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
-    llMatchWeightHorizontal +
-      vMatchParent +
+    tvGravity(Gravity.CENTER) +
+      llWrapWeightHorizontal +
+      tvColorResource(R.color.white) +
+      vBackground(R.drawable.inflow_amount) +
+      vMargin(0,
+        0,
+        resGetDimensionPixelSize(R.dimen.padding_small),
+        0) +
+      tvSize(4 sp) +
       tvText("Inflow")
 
   def outflowStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
-    llMatchWeightHorizontal +
-      vMatchParent +
+    tvGravity(Gravity.CENTER) +
+      llWrapWeightHorizontal +
+      tvColorResource(R.color.white) +
+      vBackground(R.drawable.outflow_amount) +
+      vMargin(resGetDimensionPixelSize(R.dimen.padding_small),
+        0,
+        resGetDimensionPixelSize(R.dimen.padding_large),
+        0) +
+      tvSize(4 sp) +
       tvText("Outflow")
 
   def flowsStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
     llHorizontal +
-      vPadding(resGetDimensionPixelSize(R.dimen.padding_default),
-        resGetDimensionPixelSize(R.dimen.padding_default),
-        resGetDimensionPixelSize(R.dimen.padding_default),
-        resGetDimensionPixelSize(R.dimen.padding_default))
+      vMatchWidth
 
   def contactContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
     vMatchWidth +
+      llGravity(Gravity.CENTER) +
       llHorizontal
 
 }
