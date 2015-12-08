@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.support.v4.app.{FragmentStatePagerAdapter, FragmentManager, Fragment}
 import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.ui.main.fragments.contacts.{Fragments, ContactsFragment}
+import com.rxbytes.splitpal.ui.main.fragments.events.EventsFragment
+import com.rxbytes.splitpal.ui.main.fragments.flows.FlowsFragment
 import macroid.ContextWrapper
 
 /**
@@ -14,12 +16,25 @@ class SplitPalPageAdapter(fragmentManager: FragmentManager)(implicit contextWrap
 
   val screens = Screens.screens
 
-  override def getItem(i: Int): Fragment = {
-    val fragment = new ContactsFragment
-    val args = new Bundle()
-    args.putInt(Fragments.fragmentId, i)
-    fragment.setArguments(args)
-    fragment
+  override def getItem(i: Int): Fragment = i match {
+    case 0 =>
+      val fragment = new FlowsFragment
+      val args = new Bundle()
+      args.putInt(Fragments.fragmentId, i)
+      fragment.setArguments(args)
+      fragment
+    case 1 =>
+      val fragment = new EventsFragment
+      val args = new Bundle()
+      args.putInt(Fragments.fragmentId, i)
+      fragment.setArguments(args)
+      fragment
+    case 2 =>
+      val fragment = new ContactsFragment
+      val args = new Bundle()
+      args.putInt(Fragments.fragmentId, i)
+      fragment.setArguments(args)
+      fragment
   }
 
   override def getCount: Int = screens.length
