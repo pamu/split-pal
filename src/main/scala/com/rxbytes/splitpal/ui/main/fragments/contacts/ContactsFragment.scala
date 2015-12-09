@@ -33,7 +33,6 @@ class ContactsFragment
       Seq(
         Contact(1, "Hello",
           "Pamu Nagarjuna",
-          "hello",
           1000)
       )
     )(contact => Unit)
@@ -51,7 +50,7 @@ class ContactsFragment
         rvAdapter(adapter)
     )
 
-    runUi(cLayout.empty())
+    runUi(cLayout.fetchContacts())
 
     cLayout.layout
   }

@@ -3,6 +3,7 @@ package com.rxbytes.splitpal.ui.main.fragments.contacts.layouts
 import android.support.v7.widget.RecyclerView
 import android.widget._
 import com.rxbytes.splitpal.R
+import com.rxbytes.splitpal.ui.main.fragments.contacts.{ContactsListRecyclerAdapter, Contact, ContactsUtils}
 import com.rxbytes.splitpal.ui.main.fragments.contacts.styles.ContactsStyle
 import macroid.{Ui, ContextWrapper}
 import com.fortysevendeg.macroid.extras.ViewTweaks._
@@ -59,5 +60,20 @@ class ContactsLayout(implicit contextWrapper: ContextWrapper)
       (placeholder <~ vGone) ~
       (contactsList <~ vVisible) ~
       (contactsList <~ rvAdapter(adapter))
+
+  def reloadList(entities: Seq[Contact]): Ui[_] = entities.length match {
+    case 0 => empty()
+    case _ => adapter(new ContactsListRecyclerAdapter(entities))
+  }
+
+  def fetchContacts(): Ui[_] = {
+    ContactsUtils.contactsAsync mapUi {
+      contacts =>
+        reloadList(contacts)
+    } recoverUi {
+      case _ => failed()
+    }
+    loading()
+  }
 
 }

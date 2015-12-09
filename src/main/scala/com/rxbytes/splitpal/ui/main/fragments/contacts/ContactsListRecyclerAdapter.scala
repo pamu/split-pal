@@ -147,5 +147,4 @@ object PhoneNumber {
 case class Contact(dbId: Long,
                    avatarLink: String,
                    name: String,
-                   status: String,
                    flow: Int)
