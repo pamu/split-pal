@@ -14,7 +14,7 @@ import macroid.ContextWrapper
 class SplitPalPageAdapter(fragmentManager: FragmentManager)(implicit contextWrapper: ContextWrapper)
   extends FragmentStatePagerAdapter(fragmentManager) {
 
-  val screens = Screens.screens
+  val screens = Screens.screens(contextWrapper)
 
   override def getItem(i: Int): Fragment = i match {
     case 0 =>

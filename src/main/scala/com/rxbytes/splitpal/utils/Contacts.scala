@@ -11,7 +11,7 @@ import scala.util.{Failure, Success, Try}
   */
 object Contacts {
 
-  val LOG_TAG = classOf[Contacts.type].getSimpleName
+  val LOG_TAG = Contacts.getClass.getSimpleName
 
   def getListFromCursor[T](cursor: Option[Cursor], conversionFunction: Cursor => T): Seq[T] = {
     @tailrec
@@ -27,7 +27,7 @@ object Contacts {
     }
 
     cursor match {
-      case Some(cursorObject) =>
+      case Some(cursorObject) if cursorObject.moveToFirst() =>
        val entityList = getListFromEntityLoop(cursorObject, Seq.empty[T])
         cursorObject.close()
         entityList

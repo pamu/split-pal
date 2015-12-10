@@ -42,8 +42,8 @@ object ContactsUtils {
             PhoneContactColumns.DISPLAY_NAME,
             PhoneContactColumns.HAS_PHONE_NUMBER
           ),
-          null,
-          null,
+          s"${PhoneContactColumns.HAS_PHONE_NUMBER} != ?",
+          Array("0"),
           null
         )
     )
@@ -52,7 +52,7 @@ object ContactsUtils {
       val id = cursor.getInt(cursor.getColumnIndex(PhoneContactColumns._ID))
       val displayName = cursor.getString(cursor.getColumnIndex(PhoneContactColumns.DISPLAY_NAME))
       val hasPhoneNumber = cursor.getString(cursor.getColumnIndex(PhoneContactColumns.HAS_PHONE_NUMBER))
-      ContactWithDisplayName(id, displayName, hasPhoneNumber.toBoolean)
+      ContactWithDisplayName(id, displayName, hasPhoneNumber.toInt > 0)
     }
 
     Contacts.getListFromCursor(cursor, conversionFunction)
@@ -70,7 +70,7 @@ object ContactsUtils {
           PhoneContactColumns.PHONE_CONTACT_ID,
           PhoneContactColumns.NUMBER
         ),
-        s"${PhoneContactColumns.PHONE_CONTACT_ID} = ?",
+        s"${PhoneContactColumns.PHONE_CONTACT_ID} = ? and ${PhoneContactColumns.NUMBER} not null",
         Array(contactWithDisplayName.contactId.toString),
         null,
         null

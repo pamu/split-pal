@@ -11,7 +11,7 @@ import android.widget.{TextView, ImageView, LinearLayout}
 import com.fortysevendeg.macroid.extras.ImageViewTweaks._
 import com.rxbytes.splitpal.ui.commons.AsyncImageTweaks._
 import com.rxbytes.splitpal.R
-import macroid.{ActivityContextWrapper, Tweak, ContextWrapper}
+import macroid.{Ui, ActivityContextWrapper, Tweak, ContextWrapper}
 import macroid.FullDsl._
 import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
@@ -34,19 +34,18 @@ class ContactsListRecyclerAdapter(contacts: Seq[Contact])(clickListener: Contact
     vh.content.setOnClickListener(new OnClickListener {
       override def onClick(view: View): Unit = clickListener(contacts(i))
     })
-
     Log.d(LOG_TAG, "binding")
-
-    vh.bind(contacts(i))
+    Log.d(LOG_TAG, s"contact object ${contacts(i)}")
+    runUi(vh.bind(contacts(i)))
   }
 
   override def onCreateViewHolder(viewGroup: ViewGroup, i: Int): ContactViewHolder =
-    ContactViewHolder(ContactLayoutAdapter())
+    new ContactViewHolder(new ContactLayoutAdapter())
 
 }
 
-case class ContactViewHolder(adapter: ContactLayoutAdapter)
-                            (implicit activityContextWrapper: ActivityContextWrapper)
+class ContactViewHolder(adapter: ContactLayoutAdapter)
+                       (implicit activityContextWrapper: ActivityContextWrapper)
   extends ViewHolder(adapter.content) {
 
   val content = adapter.content
@@ -54,17 +53,16 @@ case class ContactViewHolder(adapter: ContactLayoutAdapter)
   val profileName = adapter.profileName
   val profileStatus = adapter.profileStatus
 
-  def bind(contact: Contact): Unit = {
+  def bind(contact: Contact): Ui[_] = {
     val avatarSize = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
-    runUi((profilePic <~ roundedImage(R.drawable.ic_launcher, R.drawable.ic_launcher, avatarSize)) ~
+    (profilePic <~ roundedImage(R.drawable.ic_launcher, R.drawable.ic_launcher, avatarSize)) ~
       (profileName <~ tvText(contact.name)) ~
       (profileStatus <~ (if (contact.flow > 0) tvText(s"owes you ${contact.flow}") else tvText(s"you owe ${contact.flow}")))
-    )
   }
 
 }
 
-case class ContactLayoutAdapter(implicit activityContextWrapper: ActivityContextWrapper)
+class ContactLayoutAdapter(implicit activityContextWrapper: ActivityContextWrapper)
   extends ContactLayoutStyles {
 
   var profilePic = slot[ImageView]
@@ -130,17 +128,6 @@ trait ContactLayoutStyles {
     vMatchWidth +
       llGravity(Gravity.CENTER) +
       llHorizontal
-
-}
-
-class PhoneNumber(number: Long)
-
-object PhoneNumber {
-
-  //TODO parse string and check if it can be converted to PhoneNumber, return PhoneNumber in case possible
-  def apply(phoneNumberStr: String): PhoneNumber = new PhoneNumber(phoneNumberStr.toLong)
-
-  def unapply(phoneNumber: PhoneNumber): Option[(String)] = Some((phoneNumber.toString))
 
 }
 
