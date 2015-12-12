@@ -55,7 +55,7 @@ class ContactViewHolder(adapter: ContactLayoutAdapter)
 
   def bind(contact: Contact): Ui[_] = {
     val avatarSize = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
-    (profilePic <~ roundedImage(R.drawable.ic_launcher, R.drawable.ic_launcher, avatarSize)) ~
+    (profilePic <~ roundedImage("http://fb.com", R.drawable.ic_launcher, avatarSize)) ~
       (profileName <~ tvText(contact.name)) ~
       (profileStatus <~ (if (contact.flow > 0) tvText(s"owes you ${contact.flow}") else tvText(s"you owe ${contact.flow}")))
   }

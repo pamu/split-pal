@@ -21,15 +21,6 @@ object AsyncImageTweaks {
       roundedImageTweak(url, placeHolder, size)
   }
 
-  def roundedImage(url: Int,
-        placeHolder: Int,
-        size: Int)(implicit context: ActivityContextWrapper) = CurrentVersion match {
-    case sdk if sdk >= Lollipop =>
-      srcImage(url, placeHolder) + vCircleOutlineProvider(0)
-    case _ =>
-      roundedImageTweak(url, placeHolder, size)
-  }
-
   private def roundedImageTweak(
       url: String,
       placeHolder: Int,
@@ -44,35 +35,8 @@ object AsyncImageTweaks {
     }
   )
 
-  private def roundedImageTweak(
-      url: Int,
-      placeHolder: Int,
-      size: Int
-      )(implicit context: ActivityContextWrapper): Tweak[W] = Tweak[W](
-    imageView => {
-      Picasso.`with`(context.getOriginal)
-          .load(url)
-          .transform(new CircularTransformation(size))
-          .placeholder(placeHolder)
-          .into(imageView)
-    }
-  )
-
-
   def srcImage(
       url: String,
-      placeHolder: Int
-      )(implicit context: ActivityContextWrapper): Tweak[W] = Tweak[W](
-    imageView => {
-      Picasso.`with`(context.getOriginal)
-          .load(url)
-          .placeholder(placeHolder)
-          .into(imageView)
-    }
-  )
-
-  def srcImage(
-      url: Int,
       placeHolder: Int
       )(implicit context: ActivityContextWrapper): Tweak[W] = Tweak[W](
     imageView => {
@@ -90,12 +54,6 @@ object AsyncImageTweaks {
           .into(imageView)
     }
   )
-  def srcImage(url: Int)(implicit context: ActivityContextWrapper): Tweak[W] = Tweak[W](
-    imageView => {
-      Picasso.`with`(context.getOriginal)
-          .load(url)
-          .into(imageView)
-    }
-  )
+
 }
 
