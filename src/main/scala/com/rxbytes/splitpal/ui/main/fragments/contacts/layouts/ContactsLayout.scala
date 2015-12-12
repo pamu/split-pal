@@ -56,10 +56,12 @@ trait ContactsLayout
       (placeholder <~ vGone) ~
       (progressBar <~ vGone)
 
-  def loading(): Ui[_] =
+  def loading(): Ui[_] = {
+    Log.d("loading", "loading")
     (progressBar <~ vVisible) ~
       (contactsList <~ vGone) ~
       (placeholder <~ vGone)
+  }
 
   def failed(): Ui[_] =
     (progressBar <~ vGone) ~
@@ -88,8 +90,7 @@ trait ContactsLayout
     case _ => adapter(new ContactsListRecyclerAdapter(entities)(listener => Unit))
   }
 
-  def fetchContacts(implicit activityContextWrapper: ActivityContextWrapper): Ui[_] = {
-
+  def fetchContacts()(implicit activityContextWrapper: ActivityContextWrapper): Ui[_] = {
     ContactsUtils.contactsAsync mapUi {
       contacts =>
         Log.d("contacts", s"${contacts.length}")
@@ -100,7 +101,6 @@ trait ContactsLayout
         ex.printStackTrace()
         failed()
     }
-
     loading()
   }
 

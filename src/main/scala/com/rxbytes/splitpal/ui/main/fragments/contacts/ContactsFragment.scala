@@ -6,7 +6,7 @@ import android.util.Log
 import android.view._
 import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.commons.ContextWrapperProvider
-import com.rxbytes.splitpal.ui.main.Screens
+//import com.rxbytes.splitpal.ui.main.Screens
 import com.rxbytes.splitpal.ui.main.fragments.contacts.layouts.ContactsLayout
 import macroid.{ContextWrapper, Contexts}
 import macroid.FullDsl._
@@ -27,12 +27,12 @@ class ContactsFragment
   Log.d(LOG_TAG, "Contacts Fragment created")
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
-    val screens = Screens.screens(fragmentContextWrapper)
-    val element = getArguments.getInt(Fragments.fragmentId)
-    val screen = screens(element)
-    runUi(loading())
-    runUi(init() ~ fetchContacts)
-    layout
+//    val screens = Screens.screens(fragmentContextWrapper)
+//    val element = getArguments.getInt(Fragments.fragmentId)
+//    val screen = screens(element)
+    val contactsLayout = layout
+    runUi(init() ~ fetchContacts())
+    contactsLayout
   }
 
   override def onCreateOptionsMenu(menu: Menu, inflater: MenuInflater): Unit = {
