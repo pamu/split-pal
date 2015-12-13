@@ -57,7 +57,7 @@ trait ContactsLayout
       (progressBar <~ vGone)
 
   def loading(): Ui[_] = {
-    Log.d("loading", "loading")
+    Log.d("loading", "loa")
     (progressBar <~ vVisible) ~
       (contactsList <~ vGone) ~
       (placeholder <~ vGone)
@@ -85,16 +85,18 @@ trait ContactsLayout
         <~ rvAddItemDecoration(new ListItemDecorator)
         <~ rvAdapter(adapter))
 
-  def reloadList(entities: Seq[Contact])(implicit activityContextWrapper: ActivityContextWrapper): Ui[_] = entities.length match {
+  def reloadList[VH <: RecyclerView.ViewHolder]
+  (adapterInstance: RecyclerView.Adapter[VH])
+  (implicit activityContextWrapper: ActivityContextWrapper): Ui[_] = adapterInstance.getItemCount match {
     case 0 => empty()
-    case _ => adapter(new ContactsListRecyclerAdapter(entities)(listener => Unit))
+    case _ => adapter(adapterInstance)
   }
 
-  def fetchContacts()(implicit activityContextWrapper: ActivityContextWrapper): Ui[_] = {
+  def fetchContacts(implicit activityContextWrapper: ActivityContextWrapper): Ui[_] = {
     ContactsUtils.contactsAsync mapUi {
       contacts =>
         Log.d("contacts", s"${contacts.length}")
-        reloadList(contacts)
+        reloadList(new ContactsListRecyclerAdapter(contacts)(contact => Unit))
     } recoverUi {
       case ex =>
         Log.d("failed", ex.getMessage)
