@@ -30,6 +30,8 @@ class ContactsFragment
 //    val screens = Screens.screens(fragmentContextWrapper)
 //    val element = getArguments.getInt(Fragments.fragmentId)
 //    val screen = screens(element)
+
+    //call the layout before doing any operation on it.
     val contactsLayout = layout
     runUi(init() ~ fetchContacts())
     contactsLayout

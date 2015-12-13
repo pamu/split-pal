@@ -12,11 +12,11 @@ import scala.util.Try
   * Created by pnagarjuna on 09/12/15.
   */
 
-//case class CompleteContact(contactId: Int,
-//                           displayName: String,
-//                           phoneNumber: String,
-//                           email: String,
-//                           emailData: String)
+case class CompleteContact(contactId: Int,
+                           displayName: String,
+                           phoneNumber: String,
+                           email: String,
+                           emailData: String)
 
 object ContactsUtils {
 
@@ -63,7 +63,6 @@ object ContactsUtils {
                                  (implicit contextWrapper: ContextWrapper): Seq[ContactWithNameAndPhone] = {
 
     contactsWithDisplayName.flatMap { contactWithDisplayName =>
-
       val cursor = Option[Cursor](contextWrapper.application.getContentResolver.query(
         PhoneContactColumns.PHONE_CONTENT_URI,
         Array(
@@ -79,22 +78,23 @@ object ContactsUtils {
       def conversionFunction: Cursor => ContactWithPhoneNumber = cursor => {
         val id = cursor.getInt(cursor.getColumnIndex(PhoneContactColumns.PHONE_CONTACT_ID))
         val number = cursor.getString(cursor.getColumnIndex(PhoneContactColumns.NUMBER))
-        ContactWithPhoneNumber(id, number)
+        ContactWithPhoneNumber(id, number.split("\\s+").map(_.trim).reduce(_ + _))
       }
 
-      Contacts.getListFromCursor(cursor, conversionFunction).map {
-        contact =>
-          ContactWithNameAndPhone(contact.contactId, contactWithDisplayName.displayName, contact.phoneNumber)
+      Contacts.getListFromCursor(cursor, conversionFunction).map { contact =>
+        ContactWithNameAndPhone(contact.contactId, contactWithDisplayName.displayName, contact.phoneNumber)
       }
-
     }
 
   }
 
   def contacts(implicit contextWrapper: ContextWrapper): Seq[Contact] = {
-    queryContactsForPhoneNumber(queryContactsWithDisplayName).map { contactWithNameAndPhone =>
-      Contact(1, "", contactWithNameAndPhone.displayName, 1)
-    }
+    queryContactsForPhoneNumber(queryContactsWithDisplayName)
+      .map { contact => contact.phoneNumber -> contact }(scala.collection.breakOut).toMap
+      .map { pair => pair._2 }.toSeq
+      .map { contactWithNameAndPhone =>
+        Contact(1, "", contactWithNameAndPhone.displayName + " " + contactWithNameAndPhone.phoneNumber, 100)
+      }
   }
 
   import scala.concurrent.ExecutionContext.Implicits.global
