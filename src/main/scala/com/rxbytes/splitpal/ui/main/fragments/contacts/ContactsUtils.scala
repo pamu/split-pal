@@ -78,7 +78,10 @@ object ContactsUtils {
       def conversionFunction: Cursor => ContactWithPhoneNumber = cursor => {
         val id = cursor.getInt(cursor.getColumnIndex(PhoneContactColumns.PHONE_CONTACT_ID))
         val number = cursor.getString(cursor.getColumnIndex(PhoneContactColumns.NUMBER))
-        ContactWithPhoneNumber(id, number.split("\\s+").map(_.trim).reduce(_ + _))
+        ContactWithPhoneNumber(
+          id,
+          number.split("\\s+").map(_.trim).reduce(_ + _)
+        )
       }
 
       Contacts.getListFromCursor(cursor, conversionFunction).map { contact =>
@@ -93,7 +96,7 @@ object ContactsUtils {
       .map { contact => contact.phoneNumber -> contact }(scala.collection.breakOut).toMap
       .map { pair => pair._2 }.toSeq
       .map { contactWithNameAndPhone =>
-        Contact(1, "", contactWithNameAndPhone.displayName + " " + contactWithNameAndPhone.phoneNumber, 100)
+        Contact(1, "", contactWithNameAndPhone.phoneNumber, 100)
       }
   }
 

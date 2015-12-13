@@ -2,21 +2,16 @@ package com.rxbytes.splitpal.ui.main.fragments.contacts
 
 import android.support.v7.widget.{CardView, RecyclerView}
 import android.support.v7.widget.RecyclerView.ViewHolder
-import android.text.TextUtils.TruncateAt
-import android.util.Log
 import android.view.View.OnClickListener
-import android.view.{Gravity, View, ViewGroup}
-import android.widget.ImageView.ScaleType
+import android.view.{View, ViewGroup}
 import android.widget.{TextView, ImageView, LinearLayout}
-import com.fortysevendeg.macroid.extras.ImageViewTweaks._
 import com.rxbytes.splitpal.ui.commons.AsyncImageTweaks._
 import com.rxbytes.splitpal.R
-import macroid.{Ui, ActivityContextWrapper, Tweak, ContextWrapper}
+import com.rxbytes.splitpal.ui.main.fragments.contacts.styles.ContactLayoutStyles
+import macroid.{Ui, ActivityContextWrapper}
 import macroid.FullDsl._
-import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import com.fortysevendeg.macroid.extras.TextTweaks._
-import com.fortysevendeg.macroid.extras.ViewTweaks._
 import scala.language.postfixOps
 
 /**
@@ -34,8 +29,6 @@ class ContactsListRecyclerAdapter(contacts: Seq[Contact])(clickListener: Contact
     vh.content.setOnClickListener(new OnClickListener {
       override def onClick(view: View): Unit = clickListener(contacts(i))
     })
-    Log.d(LOG_TAG, "binding")
-    Log.d(LOG_TAG, s"contact object ${contacts(i)}")
     runUi(vh.bind(contacts(i)))
   }
 
@@ -75,6 +68,7 @@ class ContactLayoutAdapter(implicit activityContextWrapper: ActivityContextWrapp
         w[ImageView] <~ wire(profilePic) <~ profilePicStyle,
         l[LinearLayout](
           w[TextView] <~ wire(profileName) <~ profileNameStyle,
+          //w[ImageView] <~ lineStyle,
           w[TextView] <~ wire(profileStatus) <~ profileStatusStyle
         ) <~ profileContentStyle
       ) <~ contactContentStyle
@@ -85,51 +79,7 @@ class ContactLayoutAdapter(implicit activityContextWrapper: ActivityContextWrapp
 
 }
 
-trait ContactLayoutStyles {
 
-  def cardStyle(implicit contextWrapper: ContextWrapper): Tweak[CardView] =
-    vMatchWidth
-
-  def profilePicStyle(implicit contextWrapper: ContextWrapper): Tweak[ImageView] = {
-    val size = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
-    lp[LinearLayout](size, size) +
-      ivScaleType(ScaleType.CENTER_CROP) +
-      llLayoutGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT) +
-      vMargin(8 dp, 8 dp, 24 dp, 8 dp)
-  }
-
-  def profileNameStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
-    llMatchWeightVertical +
-      vMatchParent +
-      tvSizeResource(R.dimen.title_font) +
-      tvColorResource(R.color.colorPrimary) +
-      tvMaxLines(1) +
-      tvEllipsize(TruncateAt.END)
-
-  def profileStatusStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
-    llMatchWeightVertical +
-      vMatchParent +
-      tvNormalLight +
-      tvItalicLight +
-      tvSizeResource(R.dimen.status_font) +
-      tvColorResource(R.color.colorPrimary) +
-      llLayoutMargin(0,
-        resGetDimensionPixelSize(R.dimen.padding_small),
-        resGetDimensionPixelSize(R.dimen.padding_tiny),
-        resGetDimensionPixelSize(R.dimen.padding_small)) +
-      tvMaxLines(1) +
-      tvEllipsize(TruncateAt.END)
-
-  def profileContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
-    llVertical +
-      llWrapWeightHorizontal
-
-  def contactContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
-    vMatchWidth +
-      llGravity(Gravity.CENTER) +
-      llHorizontal
-
-}
 
 case class Contact(dbId: Long,
                    avatarLink: String,
