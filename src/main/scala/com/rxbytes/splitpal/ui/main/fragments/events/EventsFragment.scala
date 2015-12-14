@@ -19,7 +19,7 @@ class EventsFragment
   override lazy implicit val contextProvider: ContextWrapper = fragmentContextWrapper
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
-    val eLayout = layout(contextProvider)
+    val eLayout = layout(fragmentContextWrapper)
     eLayout
   }
 
