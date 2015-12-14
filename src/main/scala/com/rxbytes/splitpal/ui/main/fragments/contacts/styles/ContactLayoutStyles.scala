@@ -36,7 +36,8 @@ trait ContactLayoutStyles {
       tvSizeResource(R.dimen.title_font) +
       tvColorResource(R.color.colorPrimary) +
       tvMaxLines(1) +
-      tvEllipsize(TruncateAt.END)
+      tvEllipsize(TruncateAt.END) +
+      tvBold
 
   def profileStatusStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
     llMatchWeightVertical +

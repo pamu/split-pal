@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Split Pal</string>
+    <string name="app_name">SplitPay</string>
     <string name="flows">Flows</string>
     <string name="events">Events</string>
     <string name="contacts">Contacts</string>
