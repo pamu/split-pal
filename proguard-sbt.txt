@@ -169,13 +169,13 @@
 # view res/layout/abc_screen_simple_overlay_action_mode.xml #generated:32
 -keep class android.support.v7.widget.ViewStubCompat { <init>(...); }
 
-# view AndroidManifest.xml #generated:19
+# view AndroidManifest.xml #generated:22
 -keep class android.test.InstrumentationTestRunner { <init>(...); }
 
-# view AndroidManifest.xml #generated:7
+# view AndroidManifest.xml #generated:10
 -keep class com.rxbytes.splitpal.ui.login.LoginActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:14
+# view AndroidManifest.xml #generated:17
 -keep class com.rxbytes.splitpal.ui.main.MainActivity { <init>(...); }
 
 # view res/layout/abc_action_menu_item_layout.xml #generated:17
