@@ -16,6 +16,10 @@ class SampleComponentSpec
       true must beTrue
     }
 
+    "pass" in {
+      (1 + 1) must be_==(2)
+    }
+
   }
 
 }
