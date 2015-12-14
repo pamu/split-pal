@@ -1,5 +1,6 @@
 package com.rxbytes.splitpal.ui.main.fragments.events
 
+import android.support.v7.widget.CardView
 import android.widget.{TextView, LinearLayout}
 import com.rxbytes.splitpal.ui.main.fragments.events.styles.EventLayoutStyles
 import macroid.ActivityContextWrapper
@@ -14,9 +15,11 @@ class EventsLayoutAdapter(implicit activityContextWrapper: ActivityContextWrappe
   var eventName = slot[TextView]
 
   def layout = getUi(
-    l[LinearLayout](
-      w[TextView] <~ wire(eventName) <~ eventStyle
-    ) <~ eventContentStyle
+    l[CardView](
+      l[LinearLayout](
+        w[TextView] <~ wire(eventName) <~ eventStyle
+      ) <~ eventContentStyle
+    ) <~ cardStyle
   )
 
   val content = layout

@@ -28,23 +28,27 @@ class MainActivity
 
     toolBar map setSupportActionBar
     val adapter = new SplitPalPageAdapter(getSupportFragmentManager)
-    runUi(viewPager <~ vpAdapter(adapter))
-    slidingTabLayout.map(_.setDistributeEvenly(true))
-    slidingTabLayout.map(_.setCustomTabColorizer(new TabColorizer {
-      override def getIndicatorColor(position: Int): Int = resGetColor(R.color.white)
-    }))
-    slidingTabLayout.map(_.setViewPager(viewPager.get))
-    slidingTabLayout.map(_.setOnPageChangeListener(new ViewPager.OnPageChangeListener {
+    runUi(viewPager <~ vpAdapter(adapter) <~ vpOffscreenPageLimit(3))
+    runOnUiThread(new Runnable {
+      override def run(): Unit = {
+        slidingTabLayout.map(_.setDistributeEvenly(true))
+        slidingTabLayout.map(_.setCustomTabColorizer(new TabColorizer {
+          override def getIndicatorColor(position: Int): Int = resGetColor(R.color.white)
+        }))
+        slidingTabLayout.map(_.setViewPager(viewPager.get))
+        slidingTabLayout.map(_.setOnPageChangeListener(new ViewPager.OnPageChangeListener {
 
-      override def onPageScrollStateChanged(i: Int): Unit = {}
+          override def onPageScrollStateChanged(i: Int): Unit = {}
 
-      override def onPageScrolled(i: Int, v: Float, i1: Int): Unit = {}
+          override def onPageScrolled(i: Int, v: Float, i1: Int): Unit = {}
 
-      override def onPageSelected(i: Int): Unit = {
-        Log.d(LOG_TAG, s"page selected ${i}")
+          override def onPageSelected(i: Int): Unit = {
+            Log.d(LOG_TAG, s"page selected ${i}")
+          }
+
+        }))
       }
-
-    }))
+    })
 
   }
 

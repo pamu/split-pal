@@ -1,7 +1,10 @@
 package com.rxbytes.splitpal.ui.main.fragments.events.styles
 
-import macroid.ContextWrapper
+import android.view.Gravity
+import android.widget.TextView
+import macroid.{Tweak, ContextWrapper}
 import com.fortysevendeg.macroid.extras.ViewTweaks._
+import com.fortysevendeg.macroid.extras.TextTweaks._
 import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
 
 /**
@@ -9,10 +12,17 @@ import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
   */
 trait EventLayoutStyles {
 
-  def eventStyle(implicit contextWrapper: ContextWrapper) =
-    vWrapContent
+  def eventStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
+    llMatchWeightVertical +
+      tvGravity(Gravity.CENTER) +
+      llLayoutGravity(Gravity.CENTER) +
+      tvBold
+
 
   def eventContentStyle(implicit contextWrapper: ContextWrapper) =
     llVertical
+
+  def cardStyle(implicit contextWrapper: ContextWrapper) =
+    vMatchWidth
 
 }

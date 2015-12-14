@@ -13,5 +13,4 @@ trait EventsLayout
 
   self: ContextWrapperProvider =>
 
-
 }

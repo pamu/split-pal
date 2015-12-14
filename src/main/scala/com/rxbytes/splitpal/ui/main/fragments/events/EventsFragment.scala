@@ -6,6 +6,7 @@ import android.view._
 import com.rxbytes.splitpal.commons.ContextWrapperProvider
 import com.rxbytes.splitpal.ui.main.fragments.events.layouts.EventsLayout
 import macroid.{ContextWrapper, Contexts}
+import macroid.FullDsl._
 
 /**
   * Created by pnagarjuna on 07/12/15.
@@ -20,6 +21,9 @@ class EventsFragment
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     val eLayout = layout(fragmentContextWrapper)
+    runUi(
+      adapter(new EventsListRecyclerAdapter(Seq.fill[Event](1)(Event(1, "Party")))(event => Unit))
+    )
     eLayout
   }
 
@@ -30,5 +34,5 @@ class EventsFragment
   override def onOptionsItemSelected(item: MenuItem): Boolean = {
     super.onOptionsItemSelected(item)
   }
-  
+
 }
