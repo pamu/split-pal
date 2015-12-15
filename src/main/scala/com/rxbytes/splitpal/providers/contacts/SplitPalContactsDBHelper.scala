@@ -22,8 +22,10 @@ class SplitPalContactsDBHelper(context: Context)
        |  ${SplitPalContactsDBHelper.id} INTEGER PRIMARY KEY AUTOINCREMENT,
        |  ${ContactsContract.name} TEXT NOT NULL,
        |  ${ContactsContract.phone} TEXT NOT NULL,
+       |  ${ContactsContract.photoLink} TEXT,
        |  ${ContactsContract.registered} INT DEFAULT 0 NOT NULL,
-       |  ${ContactsContract.countryCode} TEXT DEFAULT 'IN' NOT NULL
+       |  ${ContactsContract.countryCode} TEXT DEFAULT 'IN' NOT NULL,
+       |  ${ContactsContract.creationTime} TIMESTAMP DEFAULT CURRENT_TIMESTAMP
        |);
      """.stripMargin
 
@@ -47,8 +49,10 @@ object ContactsContract {
   val contactsTable = "contacts"
   val name = "name"
   val phone = "phone"
+  val photoLink = "photo_link"
   val registered = "registered"
   val countryCode = "country_code"
+  val creationTime = "creation_time"
 }
 
 object SplitPalContactsDBHelper {
