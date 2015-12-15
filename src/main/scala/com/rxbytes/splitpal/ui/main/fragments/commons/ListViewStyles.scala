@@ -2,13 +2,17 @@ package com.rxbytes.splitpal.ui.main.fragments.commons
 
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
+import android.view.ViewGroup.LayoutParams._
 import android.widget.{Button, TextView, LinearLayout, ProgressBar}
 import com.fortysevendeg.macroid.extras.FrameLayoutTweaks._
 import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
 import com.fortysevendeg.macroid.extras.TextTweaks._
 import com.fortysevendeg.macroid.extras.ViewTweaks._
+import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import com.rxbytes.splitpal.R
 import macroid.{Tweak, ContextWrapper}
+import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller
+import macroid.FullDsl._
 
 /**
   * Created by pnagarjuna on 14/12/15.
@@ -21,11 +25,10 @@ trait ListViewStyles {
       flLayoutGravity(Gravity.CENTER) +
       vGone
 
-  def contactsListStyle(implicit contextWrapper: ContextWrapper): Tweak[RecyclerView] =
-    vMatchParent +
-      vVisible
+  def recyclerListStyle(implicit contextWrapper: ContextWrapper): Tweak[RecyclerView] =
+    llWrapWeightHorizontal
 
-  def contactsContentStyle(implicit contextWrapper: ContextWrapper) =
+  def contentStyle(implicit contextWrapper: ContextWrapper) =
     flMatchWeightVertical
 
   def placeholderContentStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
@@ -44,5 +47,16 @@ trait ListViewStyles {
     vWrapContent +
       llLayoutGravity(Gravity.CENTER) +
       tvText("Reload")
+
+  def recyclerHolderStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
+    llHorizontal +
+      vMatchWidth +
+      vVisible
+
+  def fastScrollStyle(implicit contextWrapper: ContextWrapper): Tweak[VerticalRecyclerViewFastScroller] =
+    lp[LinearLayout](20 dp, MATCH_PARENT) +
+      vMargin(0 dp, 0 dp, 5 dp, 0 dp) +
+      Tweak[VerticalRecyclerViewFastScroller](_.setBarColor(resGetColor(R.color.colorPrimary))) +
+      Tweak[VerticalRecyclerViewFastScroller](_.setHandleColor(resGetColor(R.color.colorPrimaryDark)))
 
 }

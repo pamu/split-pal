@@ -21,9 +21,8 @@ class EventsFragment
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     val eLayout = layout(fragmentContextWrapper)
-    runUi(
-      adapter(new EventsListRecyclerAdapter(Seq.fill[Event](1)(Event(1, "Party")))(event => Unit))
-    )
+    runUi(init())
+    runUi(adapter(new EventsListRecyclerAdapter(Seq.fill[Event](1)(Event(1, "Party")))(event => Unit)))
     eLayout
   }
 

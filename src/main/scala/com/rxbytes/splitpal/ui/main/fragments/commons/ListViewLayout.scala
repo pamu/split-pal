@@ -1,7 +1,6 @@
 package com.rxbytes.splitpal.ui.main.fragments.commons
 
 import android.support.v7.widget.{LinearLayoutManager, GridLayoutManager, RecyclerView}
-import android.util.Log
 import android.widget._
 import com.fortysevendeg.macroid.extras.DeviceMediaQueries._
 import com.fortysevendeg.macroid.extras.RecyclerViewTweaks._
@@ -10,8 +9,9 @@ import com.fortysevendeg.macroid.extras.ViewTweaks._
 import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.commons.ContextWrapperProvider
 import com.rxbytes.splitpal.ui.commons.ListItemDecorator
-import macroid.{Ui, ActivityContextWrapper}
+import macroid.{Tweak, Ui, ActivityContextWrapper}
 import macroid.FullDsl._
+import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller
 import scala.language.postfixOps
 
 /**
@@ -23,7 +23,9 @@ trait ListViewLayout
   self: ContextWrapperProvider =>
 
   var progressBar = slot[ProgressBar]
-  var contactsList = slot[RecyclerView]
+  var recyclerHolder = slot[LinearLayout]
+  var recyclerList = slot[RecyclerView]
+  var fastScroller = slot[VerticalRecyclerViewFastScroller]
   var placeholder = slot[LinearLayout]
   var msg = slot[TextView]
   var reloadBtn = slot[Button]
@@ -31,12 +33,15 @@ trait ListViewLayout
   def layout(implicit activityContextWrapper: ActivityContextWrapper) = getUi(
     l[FrameLayout](
       w[ProgressBar] <~ wire(progressBar) <~ progressBarStyle,
-      w[RecyclerView] <~ wire(contactsList) <~ contactsListStyle,
+      l[LinearLayout](
+        w[RecyclerView] <~ wire(recyclerList) <~ recyclerListStyle,
+        w[VerticalRecyclerViewFastScroller] <~ wire(fastScroller) <~ fastScrollStyle
+      ) <~ wire(recyclerHolder) <~ recyclerHolderStyle,
       l[LinearLayout](
         w[TextView] <~ wire(msg) <~ msgStyle,
         w[Button] <~ wire(reloadBtn) <~ btnStyle
       ) <~ wire(placeholder) <~ placeholderContentStyle
-    ) <~ contactsContentStyle
+    ) <~ contentStyle
   )
 
   def layoutManager(implicit activityContextWrapper: ActivityContextWrapper) =
@@ -46,30 +51,29 @@ trait ListViewLayout
         new GridLayoutManager(activityContextWrapper.application, 2) | new LinearLayoutManager(activityContextWrapper.application)
 
   def init()(implicit activityContextWrapper: ActivityContextWrapper): Ui[_] =
-    (contactsList <~ vVisible) ~
-      (contactsList <~
+    (recyclerHolder <~ vVisible) ~
+      (recyclerList <~
         rvLayoutManager(layoutManager) <~
         rvAddItemDecoration(new ListItemDecorator)) ~
+      (fastScroller <~ Tweak[VerticalRecyclerViewFastScroller](_.setRecyclerView(recyclerList.get))) ~
       (placeholder <~ vGone) ~
       (progressBar <~ vGone)
 
-  def loading(): Ui[_] = {
-    Log.d("loading", "loa")
+  def loading(): Ui[_] =
     (progressBar <~ vVisible) ~
-      (contactsList <~ vGone) ~
+      (recyclerHolder <~ vGone) ~
       (placeholder <~ vGone)
-  }
 
   def failed(): Ui[_] =
     (progressBar <~ vGone) ~
-      (contactsList <~ vGone) ~
+      (recyclerHolder <~ vGone) ~
       (placeholder <~ vVisible) ~
       (msg <~ vVisible <~ tvText(R.string.error)) ~
       (reloadBtn <~ vVisible)
 
   def empty(): Ui[_] =
     (progressBar <~ vGone) ~
-      (contactsList <~ vGone) ~
+      (recyclerHolder <~ vGone) ~
       (placeholder <~ vVisible) ~
       (msg <~ vVisible <~ tvText(R.string.empty)) ~
       (reloadBtn <~ vGone)
@@ -77,8 +81,8 @@ trait ListViewLayout
   def adapter[VH <: RecyclerView.ViewHolder](adapter: RecyclerView.Adapter[VH])(implicit activityContextWrapper: ActivityContextWrapper): Ui[_] =
     (progressBar <~ vGone) ~
       (placeholder <~ vGone) ~
-      (contactsList <~ vVisible) ~
-      (contactsList <~ rvLayoutManager(layoutManager)
+      (recyclerHolder <~ vVisible) ~
+      (recyclerList <~ rvLayoutManager(layoutManager)
         <~ rvAddItemDecoration(new ListItemDecorator)
         <~ rvAdapter(adapter))
 

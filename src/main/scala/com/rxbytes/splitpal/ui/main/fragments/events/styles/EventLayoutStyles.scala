@@ -12,6 +12,7 @@ import macroid.{Tweak, ContextWrapper}
 import com.fortysevendeg.macroid.extras.ViewTweaks._
 import com.fortysevendeg.macroid.extras.TextTweaks._
 import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
+import scala.language.postfixOps
 
 /**
   * Created by pnagarjuna on 13/12/15.
