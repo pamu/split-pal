@@ -57,6 +57,8 @@ trait ListViewStyles {
     lp[LinearLayout](20 dp, MATCH_PARENT) +
       vMargin(0 dp, 0 dp, 5 dp, 0 dp) +
       Tweak[VerticalRecyclerViewFastScroller](_.setBarColor(resGetColor(R.color.colorPrimary))) +
-      Tweak[VerticalRecyclerViewFastScroller](_.setHandleColor(resGetColor(R.color.colorPrimaryDark)))
+      Tweak[VerticalRecyclerViewFastScroller](_.setHandleColor(resGetColor(R.color.colorPrimaryDark))) +
+      Tweak[VerticalRecyclerViewFastScroller](_.setScrollbarFadingEnabled(true)) +
+      Tweak[VerticalRecyclerViewFastScroller](_.setScrollBarFadeDuration(1000))
 
 }
