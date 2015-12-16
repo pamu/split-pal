@@ -12,12 +12,15 @@
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_action_button"
             app:layout_anchor="@id/list_view"
             app:layout_anchorGravity="bottom|right|end"
+            app:layout_behavior="com.rxbytes.splitpal.ui.components.FABAnimationBehavior"
             style="@style/FabStyle"/>
 
 </android.support.design.widget.CoordinatorLayout>

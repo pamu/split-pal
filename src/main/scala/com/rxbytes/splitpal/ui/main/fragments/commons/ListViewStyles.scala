@@ -1,12 +1,12 @@
 package com.rxbytes.splitpal.ui.main.fragments.commons
 
-import android.support.design.widget.{CoordinatorLayout, FloatingActionButton}
 import android.view.Gravity
 import android.widget._
 import com.fortysevendeg.macroid.extras.FrameLayoutTweaks._
 import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
 import com.fortysevendeg.macroid.extras.TextTweaks._
 import com.fortysevendeg.macroid.extras.ViewTweaks._
+import ListViewTweaks._
 import com.rxbytes.splitpal.R
 import macroid.{Tweak, ContextWrapper}
 import scala.language.postfixOps
@@ -23,7 +23,8 @@ trait ListViewStyles {
       vGone
 
   def listStyle(implicit contextWrapper: ContextWrapper): Tweak[ListView] =
-    vMatchParent
+    vMatchParent +
+      lvHideDivider
 
   def contentStyle(implicit contextWrapper: ContextWrapper) =
     flMatchWeightVertical

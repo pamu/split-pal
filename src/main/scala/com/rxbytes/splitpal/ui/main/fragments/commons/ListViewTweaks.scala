@@ -22,4 +22,8 @@ object ListViewTweaks {
   def lvVisibleFastScroll: Tweak[W] =
     Tweak[W](_.setFastScrollAlwaysVisible(true))
 
+  def lvHideDivider: Tweak[W] =
+    Tweak[W](_.setDivider(null)) +
+      Tweak[W](_.setDividerHeight(0))
+
 }
