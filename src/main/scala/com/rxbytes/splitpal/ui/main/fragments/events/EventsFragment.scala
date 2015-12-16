@@ -5,6 +5,7 @@ import java.util.Date
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view._
+import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.commons.ContextWrapperProvider
 import com.rxbytes.splitpal.ui.main.fragments.events.layouts.EventsLayout
 import macroid.{ContextWrapper, Contexts}
@@ -22,14 +23,15 @@ class EventsFragment
   override lazy implicit val contextProvider: ContextWrapper = fragmentContextWrapper
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
-    val eLayout = layout(fragmentContextWrapper)
-    runUi(init)
-
-    runUi(adapter(new EventsListAdapter(Seq.fill[Event](10)(
-      Event(1, "Party", "", new Date(), None, 1, 1, 1)
-    ))(event => Unit)))
-
-    eLayout
+//    val eLayout = layout(fragmentContextWrapper)
+//    runUi(init)
+//
+//    runUi(adapter(new EventsListAdapter(Seq.fill[Event](10)(
+//      Event(1, "Party", "", new Date(), None, 1, 1, 1)
+//    ))(event => Unit)))
+//
+//    eLayout
+    inflater.inflate(R.layout.material_list, container, false)
   }
 
   override def onCreateOptionsMenu(menu: Menu, inflater: MenuInflater): Unit = {

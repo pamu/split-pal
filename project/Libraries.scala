@@ -23,6 +23,8 @@ object Libraries {
     lazy val androidAppCompat = androidDep("appcompat-v7")
     lazy val androidRecyclerview = androidDep("recyclerview-v7")
     lazy val androidCardView = androidDep("cardview-v7")
+    lazy val androidDesign = androidDep("design")
+
   }
 
   object playServices {
@@ -68,10 +70,6 @@ object Libraries {
 
   object graphics {
     lazy val picasso = "com.squareup.picasso" % "picasso" % Versions.picassoV
-  }
-
-  object scroller {
-    lazy val fastScroller = "xyz.danoz" % "recyclerviewfastscroller" % Versions.fastScroller
   }
 
   object test {

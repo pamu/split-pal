@@ -1,9 +1,10 @@
 package com.rxbytes.splitpal.ui.main.fragments.events
 
 import android.support.v7.widget.RecyclerView
+import android.view.View.OnClickListener
 import android.view.{ViewGroup, View}
 import android.widget.{TextView, BaseAdapter}
-import macroid.{IdGeneration, Ui, ActivityContextWrapper}
+import macroid.{IdGeneration, ActivityContextWrapper}
 import macroid.FullDsl._
 import com.fortysevendeg.macroid.extras.TextTweaks._
 
@@ -24,6 +25,9 @@ class EventsListAdapter(events: Seq[Event])(clickListener: Event => Unit)
     var newView = view
     if (newView == null) {
       val vh = new EventsViewHolder(new EventsLayoutAdapter())
+      vh.content.setOnClickListener(new OnClickListener {
+        override def onClick(view: View): Unit = clickListener(events(i))
+      })
       newView = vh.content
     }
     runUi(EventsViewHolder.staticBind(newView, events(i)))
@@ -40,8 +44,9 @@ class EventsViewHolder(adapter: EventsLayoutAdapter)
   val content = adapter.content
   val eventName = adapter.eventName
 
+  /**
   def bind(event: Event): Ui[_] =
-    (eventName <~ tvText(event.name))
+    (eventName <~ tvText(event.name)) **/
 
 }
 

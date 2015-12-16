@@ -4,7 +4,6 @@ import Libraries.playServices._
 import Libraries.apacheCommons._
 import Libraries.json._
 import Libraries.graphics._
-import Libraries.scroller._
 import Libraries.test._
 import android.Keys._
 import android.PromptPasswordsSigningConfig
@@ -38,9 +37,9 @@ libraryDependencies ++= Seq(
   aar(androidAppCompat),
   aar(androidCardView),
   aar(androidRecyclerview),
+  aar(androidDesign),
   aar(macroidExtras),
   aar(playServicesBase),
-  aar(fastScroller),
   apacheCommonsLang,
   json4s,
   picasso,

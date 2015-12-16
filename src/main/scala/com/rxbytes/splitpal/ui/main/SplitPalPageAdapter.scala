@@ -46,7 +46,6 @@ class SplitPalPageAdapter(fragmentManager: FragmentManager)(implicit contextWrap
 
   override def getPageTitle(position: Int): CharSequence = screens(position).title
 
-
 }
 
 object Screens {

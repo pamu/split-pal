@@ -6,9 +6,6 @@ import android.util.Log
 import android.view._
 import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.commons.ContextWrapperProvider
-import com.rxbytes.splitpal.ui.main.Screens
-
-//import com.rxbytes.splitpal.ui.main.Screens
 import com.rxbytes.splitpal.ui.main.fragments.contacts.layouts.ContactsLayout
 import macroid.{ContextWrapper, Contexts}
 import macroid.FullDsl._
@@ -29,14 +26,14 @@ class ContactsFragment
   Log.d(LOG_TAG, "Contacts Fragment created")
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
+
+    /**
     val screens = Screens.screens(fragmentContextWrapper)
     val element = getArguments.getInt(Fragments.fragmentId)
-    val screen = screens(element)
+    val screen = screens(element) **/
 
-    //call the layout before doing any operation on it.
     val contactsLayout = layout
     runUi(init ~ fetchContacts(fragmentContextWrapper))
-    //runUi(init ~ adapter(new ContactsListAdapter(Seq.fill[Contact](10)(Contact(1, None, "Pamu Nagarjuna", 1)))(contact => Unit)))
     contactsLayout
   }
 
@@ -48,8 +45,6 @@ class ContactsFragment
   override def onOptionsItemSelected(item: MenuItem): Boolean = {
     super.onOptionsItemSelected(item)
   }
-
-
 
 }
 

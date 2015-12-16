@@ -1,5 +1,6 @@
 package com.rxbytes.splitpal.ui.main.fragments.commons
 
+import android.support.design.widget.{CoordinatorLayout, FloatingActionButton}
 import android.widget._
 import com.fortysevendeg.macroid.extras.TextTweaks._
 import com.fortysevendeg.macroid.extras.ViewTweaks._
@@ -21,6 +22,7 @@ trait ListViewLayout
   var progressBar = slot[ProgressBar]
   var listHolder = slot[LinearLayout]
   var list = slot[ListView]
+  var fab = slot[FloatingActionButton]
   var placeholder = slot[LinearLayout]
   var msg = slot[TextView]
   var reloadBtn = slot[Button]

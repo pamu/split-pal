@@ -7,7 +7,7 @@ import android.widget._
 import com.rxbytes.splitpal.ui.commons.AsyncImageTweaks._
 import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.ui.main.fragments.contacts.styles.ContactLayoutStyles
-import macroid.{Tweak, IdGeneration, Ui, ActivityContextWrapper}
+import macroid.{Tweak, IdGeneration, ActivityContextWrapper}
 import macroid.FullDsl._
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import com.fortysevendeg.macroid.extras.TextTweaks._
@@ -52,12 +52,13 @@ class ContactViewHolder(adapter: ContactLayoutAdapter)
   val profileName = adapter.profileName
   val profileStatus = adapter.profileStatus
 
+  /**
   def bind(contact: Contact) = {
     val avatarSize = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
     (profilePic <~ roundedImage("http://fb.com", R.drawable.ic_launcher, avatarSize)) ~
       (profileName <~ tvText(contact.name)) ~
       (profileStatus <~ (ContactViewHolder.getStatus(contact.flow)))
-  }
+  } **/
 
 }
 

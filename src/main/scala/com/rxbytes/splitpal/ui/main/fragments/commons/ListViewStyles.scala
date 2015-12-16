@@ -1,17 +1,14 @@
 package com.rxbytes.splitpal.ui.main.fragments.commons
 
+import android.support.design.widget.{CoordinatorLayout, FloatingActionButton}
 import android.view.Gravity
-import android.view.ViewGroup.LayoutParams._
 import android.widget._
 import com.fortysevendeg.macroid.extras.FrameLayoutTweaks._
 import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
 import com.fortysevendeg.macroid.extras.TextTweaks._
 import com.fortysevendeg.macroid.extras.ViewTweaks._
-import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import com.rxbytes.splitpal.R
 import macroid.{Tweak, ContextWrapper}
-import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller
-import macroid.FullDsl._
 import scala.language.postfixOps
 
 /**
@@ -52,13 +49,5 @@ trait ListViewStyles {
     llHorizontal +
       vMatchParent +
       vVisible
-
-  def fastScrollStyle(implicit contextWrapper: ContextWrapper): Tweak[VerticalRecyclerViewFastScroller] =
-    lp[LinearLayout](20 dp, MATCH_PARENT) +
-      vMargin(0 dp, 0 dp, 5 dp, 0 dp) +
-      Tweak[VerticalRecyclerViewFastScroller](_.setBarColor(resGetColor(R.color.colorPrimary))) +
-      Tweak[VerticalRecyclerViewFastScroller](_.setHandleColor(resGetColor(R.color.colorPrimaryDark))) +
-      Tweak[VerticalRecyclerViewFastScroller](_.setScrollbarFadingEnabled(true)) +
-      Tweak[VerticalRecyclerViewFastScroller](_.setScrollBarFadeDuration(1000))
 
 }
