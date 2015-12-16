@@ -80,8 +80,7 @@ class ContactLayoutAdapter(implicit activityContextWrapper: ActivityContextWrapp
 }
 
 
-
-case class Contact(dbId: Long,
-                   avatarLink: String,
+case class Contact(id: Long,
+                   avatarLink: Option[String],
                    name: String,
                    flow: Int)

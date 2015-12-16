@@ -1,4 +1,4 @@
-package com.rxbytes.splitpal.ui.main.fragments.flows
+package com.rxbytes.splitpal.ui.main.fragments.payments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -6,9 +6,9 @@ import android.view._
 import macroid.Contexts
 
 /**
-  * Created by pnagarjuna on 08/12/15.
+  * Created by pnagarjuna on 16/12/15.
   */
-class FlowsFragment
+class PaymentsFragment
   extends Fragment
   with Contexts[Fragment] {
 
@@ -23,4 +23,5 @@ class FlowsFragment
   override def onOptionsItemSelected(item: MenuItem): Boolean = {
     super.onOptionsItemSelected(item)
   }
+
 }

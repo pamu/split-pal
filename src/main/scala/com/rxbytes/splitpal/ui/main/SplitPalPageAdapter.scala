@@ -6,7 +6,7 @@ import android.util.Log
 import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.ui.main.fragments.contacts.{Fragments, ContactsFragment}
 import com.rxbytes.splitpal.ui.main.fragments.events.EventsFragment
-import com.rxbytes.splitpal.ui.main.fragments.flows.FlowsFragment
+import com.rxbytes.splitpal.ui.main.fragments.payments.{PaymentsFragment, FlowsFragment}
 import macroid.ContextWrapper
 
 /**
@@ -18,7 +18,7 @@ class SplitPalPageAdapter(fragmentManager: FragmentManager)(implicit contextWrap
   val LOG_TAG = classOf[SplitPalPageAdapter].getSimpleName
 
   val screens = Screens.screens(contextWrapper)
-  val flows = new FlowsFragment
+  val payments = new PaymentsFragment
   val events = new EventsFragment
   val contacts = new ContactsFragment
 
@@ -28,8 +28,8 @@ class SplitPalPageAdapter(fragmentManager: FragmentManager)(implicit contextWrap
     case 0 =>
       val args = new Bundle()
       args.putInt(Fragments.fragmentId, 0)
-      flows.setArguments(args)
-      flows
+      payments.setArguments(args)
+      payments
     case 1 =>
       val args = new Bundle()
       args.putInt(Fragments.fragmentId, 1)
