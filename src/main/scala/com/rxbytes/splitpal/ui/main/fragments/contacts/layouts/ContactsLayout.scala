@@ -3,7 +3,7 @@ package com.rxbytes.splitpal.ui.main.fragments.contacts.layouts
 import android.util.Log
 import com.rxbytes.splitpal.commons.ContextWrapperProvider
 import com.rxbytes.splitpal.ui.main.fragments.commons.ListViewLayout
-import com.rxbytes.splitpal.ui.main.fragments.contacts.{ContactsListRecyclerAdapter, ContactsUtils}
+import com.rxbytes.splitpal.ui.main.fragments.contacts.{ContactsListAdapter, ContactsUtils}
 import com.rxbytes.splitpal.ui.main.fragments.contacts.styles.ContactsStyle
 import macroid.{ActivityContextWrapper, Ui}
 import macroid.FullDsl._
@@ -21,14 +21,14 @@ trait ContactsLayout
     ContactsUtils.contactsAsync mapUi {
       contacts =>
         Log.d("contacts", s"${contacts.length}")
-        reloadList(new ContactsListRecyclerAdapter(contacts)(contact => Unit))
+        reloadList(new ContactsListAdapter(contacts)(contact => Unit))
     } recoverUi {
       case ex =>
         Log.d("failed", ex.getMessage)
         ex.printStackTrace()
-        failed()
+        failed
     }
-    loading()
+    loading
   }
 
 }

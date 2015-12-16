@@ -3,8 +3,9 @@ package com.rxbytes.splitpal.ui.main.fragments.contacts.styles
 import android.support.v7.widget.CardView
 import android.text.TextUtils.TruncateAt
 import android.view.Gravity
+import android.view.ViewGroup.LayoutParams._
 import android.widget.ImageView.ScaleType
-import android.widget.{TextView, LinearLayout, ImageView}
+import android.widget.{AbsListView, TextView, LinearLayout, ImageView}
 import com.fortysevendeg.macroid.extras.ImageViewTweaks._
 import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
@@ -13,6 +14,7 @@ import com.fortysevendeg.macroid.extras.ViewTweaks._
 import com.rxbytes.splitpal.R
 import macroid.FullDsl._
 import macroid.{Tweak, ContextWrapper}
+import scala.language.postfixOps
 
 /**
   * Created by pnagarjuna on 13/12/15.
@@ -20,7 +22,7 @@ import macroid.{Tweak, ContextWrapper}
 trait ContactLayoutStyles {
 
   def cardStyle(implicit contextWrapper: ContextWrapper): Tweak[CardView] =
-    vMatchWidth
+    lp[AbsListView](MATCH_PARENT, WRAP_CONTENT)
 
   def profilePicStyle(implicit contextWrapper: ContextWrapper): Tweak[ImageView] = {
     val size = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)

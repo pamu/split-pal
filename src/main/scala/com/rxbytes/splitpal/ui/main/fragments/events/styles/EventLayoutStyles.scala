@@ -3,7 +3,7 @@ package com.rxbytes.splitpal.ui.main.fragments.events.styles
 import android.text.TextUtils.TruncateAt
 import android.view.Gravity
 import android.widget.ImageView.ScaleType
-import android.widget.{LinearLayout, TextView}
+import android.widget.{AbsListView, LinearLayout, TextView}
 import com.fortysevendeg.macroid.extras.ImageViewTweaks._
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import com.rxbytes.splitpal.R
@@ -12,6 +12,7 @@ import macroid.{Tweak, ContextWrapper}
 import com.fortysevendeg.macroid.extras.ViewTweaks._
 import com.fortysevendeg.macroid.extras.TextTweaks._
 import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
+import android.view.ViewGroup.LayoutParams._
 import scala.language.postfixOps
 
 /**
@@ -46,6 +47,6 @@ trait EventLayoutStyles {
       llWrapWeightHorizontal
 
   def cardStyle(implicit contextWrapper: ContextWrapper) =
-    vMatchWidth
+    lp[AbsListView](MATCH_PARENT, WRAP_CONTENT)
 
 }

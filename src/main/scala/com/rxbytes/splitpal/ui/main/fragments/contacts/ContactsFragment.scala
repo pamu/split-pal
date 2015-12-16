@@ -35,7 +35,8 @@ class ContactsFragment
 
     //call the layout before doing any operation on it.
     val contactsLayout = layout
-    runUi(init() ~ fetchContacts(fragmentContextWrapper))
+    runUi(init ~ fetchContacts(fragmentContextWrapper))
+    //runUi(init ~ adapter(new ContactsListAdapter(Seq.fill[Contact](10)(Contact(1, None, "Pamu Nagarjuna", 1)))(contact => Unit)))
     contactsLayout
   }
 

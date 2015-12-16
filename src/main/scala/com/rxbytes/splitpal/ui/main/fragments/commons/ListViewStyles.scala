@@ -1,9 +1,8 @@
 package com.rxbytes.splitpal.ui.main.fragments.commons
 
-import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.ViewGroup.LayoutParams._
-import android.widget.{Button, TextView, LinearLayout, ProgressBar}
+import android.widget._
 import com.fortysevendeg.macroid.extras.FrameLayoutTweaks._
 import com.fortysevendeg.macroid.extras.LinearLayoutTweaks._
 import com.fortysevendeg.macroid.extras.TextTweaks._
@@ -13,6 +12,7 @@ import com.rxbytes.splitpal.R
 import macroid.{Tweak, ContextWrapper}
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller
 import macroid.FullDsl._
+import scala.language.postfixOps
 
 /**
   * Created by pnagarjuna on 14/12/15.
@@ -25,8 +25,8 @@ trait ListViewStyles {
       flLayoutGravity(Gravity.CENTER) +
       vGone
 
-  def recyclerListStyle(implicit contextWrapper: ContextWrapper): Tweak[RecyclerView] =
-    llWrapWeightHorizontal
+  def listStyle(implicit contextWrapper: ContextWrapper): Tweak[ListView] =
+    vMatchParent
 
   def contentStyle(implicit contextWrapper: ContextWrapper) =
     flMatchWeightVertical
@@ -48,9 +48,9 @@ trait ListViewStyles {
       llLayoutGravity(Gravity.CENTER) +
       tvText("Reload")
 
-  def recyclerHolderStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
+  def listHolderStyle(implicit contextWrapper: ContextWrapper): Tweak[LinearLayout] =
     llHorizontal +
-      vMatchWidth +
+      vMatchParent +
       vVisible
 
   def fastScrollStyle(implicit contextWrapper: ContextWrapper): Tweak[VerticalRecyclerViewFastScroller] =

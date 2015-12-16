@@ -1,33 +1,36 @@
 package com.rxbytes.splitpal.ui.main.fragments.events
 
 import android.support.v7.widget.RecyclerView
-import android.view.{View, ViewGroup}
-import android.view.View.OnClickListener
-import macroid.{Ui, ActivityContextWrapper}
+import android.view.{ViewGroup, View}
+import android.widget.{TextView, BaseAdapter}
+import macroid.{IdGeneration, Ui, ActivityContextWrapper}
 import macroid.FullDsl._
 import com.fortysevendeg.macroid.extras.TextTweaks._
 
 /**
   * Created by pnagarjuna on 13/12/15.
   */
-class EventsListRecyclerAdapter(events: Seq[Event])(clickListener: Event => Unit)
+class EventsListAdapter(events: Seq[Event])(clickListener: Event => Unit)
                                (implicit activityContextWrapper: ActivityContextWrapper)
-  extends RecyclerView.Adapter[EventsViewHolder] {
+  extends BaseAdapter {
 
-  override def getItemCount: Int = events.length
+  val LOG_TAG = classOf[EventsListAdapter].getSimpleName
 
-  override def onBindViewHolder(vh: EventsViewHolder, i: Int): Unit = {
-    vh.content.setOnClickListener(new OnClickListener() {
-      override def onClick(view: View): Unit = clickListener(events(i))
-    })
+  override def getItemId(i: Int): Long = events(i).hashCode()
 
-    runUi(vh.bind(events(i)))
+  override def getCount: Int = events.length
 
+  override def getView(i: Int, view: View, viewGroup: ViewGroup): View = {
+    var newView = view
+    if (newView == null) {
+      val vh = new EventsViewHolder(new EventsLayoutAdapter())
+      newView = vh.content
+    }
+    runUi(EventsViewHolder.staticBind(newView, events(i)))
+    newView
   }
 
-
-  override def onCreateViewHolder(viewGroup: ViewGroup, i: Int): EventsViewHolder =
-    new EventsViewHolder(new EventsLayoutAdapter())
+  override def getItem(i: Int): AnyRef = events(i)
 
 }
 
@@ -39,5 +42,12 @@ class EventsViewHolder(adapter: EventsLayoutAdapter)
 
   def bind(event: Event): Ui[_] =
     (eventName <~ tvText(event.name))
+
+}
+
+object EventsViewHolder extends IdGeneration {
+
+  def staticBind(view: View, event: Event) =
+    (view.find[TextView](Id.eventName) <~ tvText(event.name))
 
 }

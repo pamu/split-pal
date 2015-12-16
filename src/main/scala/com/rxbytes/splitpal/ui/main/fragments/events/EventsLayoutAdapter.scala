@@ -3,14 +3,14 @@ package com.rxbytes.splitpal.ui.main.fragments.events
 import android.support.v7.widget.CardView
 import android.widget.{ImageView, TextView, LinearLayout}
 import com.rxbytes.splitpal.ui.main.fragments.events.styles.EventLayoutStyles
-import macroid.ActivityContextWrapper
+import macroid.{IdGeneration, ActivityContextWrapper}
 import macroid.FullDsl._
 
 /**
   * Created by pnagarjuna on 13/12/15.
   */
 class EventsLayoutAdapter(implicit activityContextWrapper: ActivityContextWrapper)
-  extends EventLayoutStyles {
+  extends EventLayoutStyles with IdGeneration {
 
   var eventName = slot[TextView]
   var eventImage = slot[ImageView]
@@ -20,7 +20,7 @@ class EventsLayoutAdapter(implicit activityContextWrapper: ActivityContextWrappe
       l[LinearLayout](
         w[ImageView] <~ wire(eventImage) <~ eventImageStyle,
         l[LinearLayout](
-          w[TextView] <~ wire(eventName) <~ eventNameStyle
+          w[TextView] <~ wire(eventName) <~ eventNameStyle <~ id(Id.eventName)
         ) <~ eventContentStyle
       ) <~ eventStyle
     ) <~ cardStyle
