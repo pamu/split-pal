@@ -1,5 +1,7 @@
 package com.rxbytes.splitpal.ui.main.fragments.events
 
+import java.util.Date
+
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view._
@@ -22,7 +24,11 @@ class EventsFragment
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     val eLayout = layout(fragmentContextWrapper)
     runUi(init())
-    runUi(adapter(new EventsListRecyclerAdapter(Seq.fill[Event](1)(Event(1, "Party")))(event => Unit)))
+
+    runUi(adapter(new EventsListRecyclerAdapter(Seq.fill[Event](1)(
+      Event(1, "Party", "", new Date(), None, 1, 1, 1)
+    ))(event => Unit)))
+
     eLayout
   }
 

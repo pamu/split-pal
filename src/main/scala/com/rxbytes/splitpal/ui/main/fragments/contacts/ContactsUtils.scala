@@ -96,7 +96,7 @@ object ContactsUtils {
       .map { contact => contact.phoneNumber -> contact }(scala.collection.breakOut).toMap
       .map { pair => pair._2 }.toSeq
       .map { contactWithNameAndPhone =>
-        Contact(1, "", contactWithNameAndPhone.phoneNumber, 100)
+        Contact(1, None, contactWithNameAndPhone.phoneNumber, 100)
       }
   }
 
