@@ -6,7 +6,7 @@ import android.util.Log
 import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.ui.main.fragments.contacts.{Fragments, ContactsFragment}
 import com.rxbytes.splitpal.ui.main.fragments.events.EventsFragment
-import com.rxbytes.splitpal.ui.main.fragments.payments.{PaymentsFragment, FlowsFragment}
+import com.rxbytes.splitpal.ui.main.fragments.payments.PaymentsFragment
 import macroid.ContextWrapper
 
 /**
@@ -52,7 +52,7 @@ class SplitPalPageAdapter(fragmentManager: FragmentManager)(implicit contextWrap
 object Screens {
 
   def screens(implicit contextWrapper: ContextWrapper) = List(
-    Screen(contextWrapper.application.getString(R.string.flows)),
+    Screen(contextWrapper.application.getString(R.string.payments)),
     Screen(contextWrapper.application.getString(R.string.events)),
     Screen(contextWrapper.application.getString(R.string.contacts)))
 
