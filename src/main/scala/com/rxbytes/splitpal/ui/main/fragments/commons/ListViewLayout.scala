@@ -1,3 +1,4 @@
+/**
 package com.rxbytes.splitpal.ui.main.fragments.commons
 
 import android.support.design.widget.{CoordinatorLayout, FloatingActionButton}
@@ -84,4 +85,4 @@ trait ListViewLayout
     case _ => adapter(baseAdapter)
   }
 
-}
+} **/

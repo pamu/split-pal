@@ -13,7 +13,7 @@ import com.rxbytes.splitpal.ui.components.IconTypes._
 import com.rxbytes.splitpal.ui.components.PathMorphDrawable
 import com.rxbytes.splitpal.ui.main.fragments.commons.ListViewTweaks._
 import com.rxbytes.splitpal.{R, TypedResource, TR}
-import macroid.{ContextWrapper, Contexts}
+import macroid.{Ui, ContextWrapper, Contexts}
 import macroid.FullDsl._
 
 /**
@@ -33,6 +33,8 @@ class EventsFragment
     eLayout **/
 
     val view = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container)
+    val progressBar = Option(TypedResource.TypedView(view).findView(TR.progress_bar))
+    val placeholder = Option(TypedResource.TypedView(view).findView(TR.placeholder))
     val listView = Option(TypedResource.TypedView(view).findView(TR.list_view))
     runUi {
       listView <~ lvAdapter(new EventsListAdapter(Seq.fill[Event](10)(
@@ -40,14 +42,11 @@ class EventsFragment
       ))(event => Unit))
     }
     val fabActionButton = Option(TypedResource.TypedView(view).findView(TR.fab_action_button))
-    runUi(fabActionButton <~ ivSrc(fabDrawable))
-    /**
-      * <~ On.click {
+    runUi(fabActionButton <~ ivSrc(fabDrawable) <~ On.click {
       Ui {
-        fabActionButton.foreach(Snackbar.make(_, "Hello", Snackbar.LENGTH_LONG).show())
+        fabActionButton.foreach(Snackbar.make(_, "Add new Event", Snackbar.LENGTH_LONG).show())
       }
-    }
-      */
+    })
     view
   }
 

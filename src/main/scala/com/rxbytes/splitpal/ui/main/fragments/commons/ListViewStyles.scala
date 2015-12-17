@@ -1,3 +1,4 @@
+/**
 package com.rxbytes.splitpal.ui.main.fragments.commons
 
 import android.view.Gravity
@@ -51,4 +52,4 @@ trait ListViewStyles {
       vMatchParent +
       vVisible
 
-}
+} **/

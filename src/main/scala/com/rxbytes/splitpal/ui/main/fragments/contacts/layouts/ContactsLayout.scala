@@ -1,3 +1,4 @@
+/**
 package com.rxbytes.splitpal.ui.main.fragments.contacts.layouts
 
 import android.util.Log
@@ -31,4 +32,4 @@ trait ContactsLayout
     loading
   }
 
-}
+} **/

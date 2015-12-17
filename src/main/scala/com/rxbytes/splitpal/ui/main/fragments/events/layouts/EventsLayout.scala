@@ -1,3 +1,4 @@
+/**
 package com.rxbytes.splitpal.ui.main.fragments.events.layouts
 
 import com.rxbytes.splitpal.commons.ContextWrapperProvider
@@ -13,4 +14,4 @@ trait EventsLayout
 
   self: ContextWrapperProvider =>
 
-}
+} **/
