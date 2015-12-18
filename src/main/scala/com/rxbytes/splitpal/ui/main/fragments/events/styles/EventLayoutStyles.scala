@@ -49,4 +49,38 @@ trait EventLayoutStyles {
   def cardStyle(implicit contextWrapper: ContextWrapper) =
     lp[AbsListView](MATCH_PARENT, WRAP_CONTENT)
 
+  def eventCreatedAtStyle(implicit contextWrapper: ContextWrapper) =
+    vWrapContent +
+      llLayoutGravity(Gravity.RIGHT)
+
+  def titleStyle(implicit contextWrapper: ContextWrapper) =
+    vMatchWidth +
+      llHorizontal
+
+  def eventMoneyInvolvedStyle(implicit contextWrapper: ContextWrapper) =
+    llWrapWeightHorizontal
+
+  def eventPeopleInvolvedStyle(implicit contextWrapper: ContextWrapper) =
+    llWrapWeightHorizontal
+
+  def moneyPeopleStyle(implicit contextWrapper: ContextWrapper) =
+    vMatchWidth +
+      llHorizontal
+
+  def paymentIconStyle(implicit contextWrapper: ContextWrapper) = {
+    val size = resGetDimensionPixelSize(R.dimen.payment_type_icon_size)
+    lp[LinearLayout](size, size) +
+      ivScaleType(ScaleType.CENTER_CROP) +
+      ivSrc(R.drawable.user_placeholder) +
+      llLayoutGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT)
+  }
+
+  def eventPaymentStyle(implicit contextWrapper: ContextWrapper) =
+    llWrapWeightHorizontal
+
+  def paymentStyle(implicit contextWrapper: ContextWrapper) =
+    vMatchWidth +
+      llHorizontal
+
+
 }

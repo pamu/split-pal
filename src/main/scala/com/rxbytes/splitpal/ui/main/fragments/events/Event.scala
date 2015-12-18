@@ -8,8 +8,8 @@ import java.util.Date
 case class Event(id: Int,
                  name: String,
                  description: String,
-                 datetime: Date,
+                 creationTime: Date,
                  eventPhoto: Option[String],
-                 totalFlow: Int,
-                 flow: Int,
-                 people: Int)
+                 moneyInvolved: Int,
+                 payment: Int,
+                 peopleInvolved: Int)
