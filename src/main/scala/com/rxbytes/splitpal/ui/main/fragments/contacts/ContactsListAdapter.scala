@@ -67,7 +67,7 @@ class ContactViewHolder(adapter: ContactLayoutAdapter)
   /**
   def bind(contact: Contact) = {
     val avatarSize = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
-    (profilePic <~ roundedImage("http://fb.com", R.drawable.ic_launcher, avatarSize)) ~
+    (profilePic <~ roundedImage("http://fb.com", R.drawable.user_placeholder, avatarSize)) ~
       (profileName <~ tvText(contact.name)) ~
       (profileStatus <~ (ContactViewHolder.getStatus(contact.flow)))
   } **/
@@ -81,7 +81,7 @@ object ContactViewHolder extends IdGeneration {
 
   def staticBind(view: View, contact: Contact)(implicit activityContextWrapper: ActivityContextWrapper) = {
     val avatarSize = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
-    (view.find[ImageView](Id.profilePic) <~ roundedImage("http://fb.com", R.drawable.ic_launcher, avatarSize)) ~
+    (view.find[ImageView](Id.profilePic) <~ roundedImage("http://fb.com", R.drawable.user_placeholder, avatarSize)) ~
       (view.find[TextView](Id.profileName) <~ tvText(contact.name)) ~
       (view.find[TextView](Id.profileStatus) <~ getStatus(contact.flow))
   }

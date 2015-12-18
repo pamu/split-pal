@@ -31,34 +31,21 @@ class EventsFragment
     ))(event => Unit)))
     eLayout **/
 
-    val view = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container)
-    val progressBar = Option(TypedResource.TypedView(view).findView(TR.progress_bar))
-    val placeholder = Option(TypedResource.TypedView(view).findView(TR.placeholder))
-    val listView = Option(TypedResource.TypedView(view).findView(TR.list_view))
+    implicit val rootView = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container)
+
     runUi {
-      listView <~ lvAdapter(new EventsListAdapter(Seq.fill[Event](10)(
-        Event(1, "Party", "", new Date(), None, 1, 1, 1)
-      ))(event => Unit))
+      adapter(EventsListAdapter(Seq.fill[Event](10)(Event(1, "Party", "", new Date(), None, 1, 1, 1))))
     }
-    val fabActionButton = Option(TypedResource.TypedView(view).findView(TR.fab_action_button))
-    runUi(fabActionButton <~ ivSrc(super.fabDrawable) <~ On.click {
-      Ui {
-        fabActionButton.foreach(Snackbar.make(_, "Add new Event", Snackbar.LENGTH_LONG).show())
+
+    runUi {
+      fabActionButton <~ ivSrc(super.fabDrawable) <~ On.click {
+        Ui {
+          fabActionButton.foreach(Snackbar.make(_, "Add new Event", Snackbar.LENGTH_LONG).show())
+        }
       }
-    })
-
-    def init: Ui[_] = {
-      (progressBar <~ vGone) ~
-        (placeholder <~ vVisible)
     }
 
-    def loading: Ui[_] = {
-      (progressBar <~ vVisible) ~
-        (placeholder <~ vGone)
-    }
-
-
-    view
+    rootView
   }
 
   override def onCreateOptionsMenu(menu: Menu, inflater: MenuInflater): Unit = {

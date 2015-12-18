@@ -24,7 +24,7 @@ trait EventLayoutStyles {
     val size = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
     lp[LinearLayout](size, size) +
       ivScaleType(ScaleType.CENTER_CROP) +
-      ivSrc(R.drawable.ic_launcher) +
+      ivSrc(R.drawable.user_placeholder) +
       llLayoutGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT) +
       vMargin(8 dp, 8 dp, 24 dp, 8 dp)
   }
