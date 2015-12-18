@@ -43,6 +43,18 @@ class ContactsListAdapter(contacts: Seq[Contact])(clickListener: Contact => Unit
 
 }
 
+object ContactsListAdapter {
+
+  def apply(contacts: Seq[Contact])
+           (implicit activityContextWrapper: ActivityContextWrapper): ContactsListAdapter =
+    new ContactsListAdapter(contacts)(contact => Unit)
+
+  def apply(contacts: Seq[Contact], clickListener: Contact => Unit)
+           (implicit activityContextWrapper: ActivityContextWrapper): ContactsListAdapter =
+    new ContactsListAdapter(contacts)(clickListener)
+
+}
+
 class ContactViewHolder(adapter: ContactLayoutAdapter)
                        (implicit activityContextWrapper: ActivityContextWrapper)
   extends ViewHolder(adapter.content) {

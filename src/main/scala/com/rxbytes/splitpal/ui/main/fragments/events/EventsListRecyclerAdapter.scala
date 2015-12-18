@@ -12,7 +12,7 @@ import com.fortysevendeg.macroid.extras.TextTweaks._
   * Created by pnagarjuna on 13/12/15.
   */
 class EventsListAdapter(events: Seq[Event])(clickListener: Event => Unit)
-                               (implicit activityContextWrapper: ActivityContextWrapper)
+                       (implicit activityContextWrapper: ActivityContextWrapper)
   extends BaseAdapter {
 
   val LOG_TAG = classOf[EventsListAdapter].getSimpleName
@@ -35,6 +35,18 @@ class EventsListAdapter(events: Seq[Event])(clickListener: Event => Unit)
   }
 
   override def getItem(i: Int): AnyRef = events(i)
+
+}
+
+object EventsListAdapter {
+
+  def apply(events: Seq[Event])
+           (implicit activityContextWrapper: ActivityContextWrapper): EventsListAdapter =
+    new EventsListAdapter(events)(event => Unit)
+
+  def apply(events: Seq[Event], clickListener: Event => Unit)
+           (implicit activityContextWrapper: ActivityContextWrapper): EventsListAdapter =
+    new EventsListAdapter(events)(clickListener)
 
 }
 
