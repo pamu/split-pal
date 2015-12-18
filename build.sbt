@@ -3,6 +3,7 @@ import Libraries.macroid._
 import Libraries.playServices._
 import Libraries.apacheCommons._
 import Libraries.json._
+import Libraries.date._
 import Libraries.graphics._
 import Libraries.test._
 import android.Keys._
@@ -43,6 +44,7 @@ libraryDependencies ++= Seq(
   apacheCommonsLang,
   json4s,
   picasso,
+  prettytime,
   specs2,
   mockito,
   androidTest,

@@ -72,6 +72,10 @@ object Libraries {
     lazy val picasso = "com.squareup.picasso" % "picasso" % Versions.picassoV
   }
 
+  object date {
+    lazy val prettytime = "org.ocpsoft.prettytime" % "prettytime" % Versions.prettytimeV
+  }
+
   object test {
     lazy val specs2 = "org.specs2" %% "specs2-core" % Versions.specs2V % "test"
     lazy val androidTest = "com.google.android" % "android" % "4.1.1.4" % "test"

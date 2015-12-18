@@ -117,6 +117,12 @@
 # view res/layout/design_navigation_menu.xml #generated:17
 -keep class android.support.design.internal.NavigationMenuView { <init>(...); }
 
+# view res/layout/material_list.xml #generated:3
+-keep class android.support.design.widget.CoordinatorLayout { <init>(...); }
+
+# view res/layout/material_list.xml #generated:56
+-keep class android.support.design.widget.FloatingActionButton { <init>(...); }
+
 # view res/layout/design_layout_snackbar.xml #generated:18
 # view sw600dp-v13/res/layout-sw600dp-v13/design_layout_snackbar.xml #generated:18
 -keep class android.support.design.widget.Snackbar$SnackbarLayout { <init>(...); }
