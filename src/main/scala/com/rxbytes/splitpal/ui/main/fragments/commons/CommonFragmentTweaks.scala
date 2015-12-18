@@ -33,6 +33,7 @@ trait CommonFragmentTweaks {
 
   def listView(implicit rootView: View) = {
     val listView = Option(TypedResource.TypedView(rootView).findView(TR.list_view))
+    runUi(listView <~ ListViewTweaks.lvEnableFastScroll)
     listView
   }
 
@@ -89,7 +90,7 @@ trait CommonFragmentTweaks {
       (msg <~ tvText(resGetString(R.string.empty)))
   }
 
-  def error(implicit rootView: View): Ui[_] = {
+  def failed(implicit rootView: View): Ui[_] = {
     (listView <~ vGone) ~
       (progressBar <~ vGone) ~
       (notifPlaceholder <~ vVisible) ~

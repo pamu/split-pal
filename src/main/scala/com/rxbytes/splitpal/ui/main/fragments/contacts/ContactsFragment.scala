@@ -36,15 +36,22 @@ class ContactsFragment
     contactsLayout **/
 
     implicit val view = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container)
-
-
     runUi(fabActionButton <~ ivSrc(super.fabDrawable) <~ On.click {
       Ui {
         fabActionButton.foreach(Snackbar.make(_, "Add new Contact", Snackbar.LENGTH_LONG).show())
       }
     })
-
+    runUi(init ~ fetchContacts)
     view
+  }
+
+  def fetchContacts(implicit rootView: View): Ui[_] = {
+    ContactsUtils.contactsAsync mapUi { contacts =>
+      reloadList(new ContactsListAdapter(contacts)(contact => Unit))
+    } recoverUi { case ex =>
+      failed
+    }
+    loading
   }
 
   override def onCreateOptionsMenu(menu: Menu, inflater: MenuInflater): Unit = {
