@@ -3,8 +3,10 @@ package com.rxbytes.splitpal.ui.main.fragments.events
 import android.support.v7.widget.RecyclerView
 import android.view.View.OnClickListener
 import android.view.{ViewGroup, View}
-import android.widget.{TextView, BaseAdapter}
-import macroid.{IdGeneration, ActivityContextWrapper}
+import android.widget.{ImageView, TextView, BaseAdapter}
+import com.rxbytes.splitpal.R
+import com.rxbytes.splitpal.ui.commons.AsyncImageTweaks
+import macroid.{Ui, IdGeneration, ActivityContextWrapper}
 import macroid.FullDsl._
 import com.fortysevendeg.macroid.extras.TextTweaks._
 
@@ -52,19 +54,19 @@ object EventsListAdapter {
 
 class EventsViewHolder(adapter: EventsLayoutAdapter)
   extends RecyclerView.ViewHolder(adapter.content) {
-
   val content = adapter.content
-  val eventName = adapter.eventName
-
-  /**
-  def bind(event: Event): Ui[_] =
-    (eventName <~ tvText(event.name)) **/
-
 }
 
 object EventsViewHolder extends IdGeneration {
 
-  def staticBind(view: View, event: Event) =
-    (view.find[TextView](Id.eventName) <~ tvText(event.name))
+  def staticBind(view: View, event: Event)(implicit activityContextWrapper: ActivityContextWrapper): Ui[_] =
+    (view.find[ImageView](Id.eventImage) <~ AsyncImageTweaks.srcImage(event.eventPhoto.getOrElse("http://fb.com"), R.drawable.user_placeholder)) ~
+      (view.find[TextView](Id.eventName) <~ tvText(event.name)) ~
+      (view.find[TextView](Id.eventCreatedAt) <~ tvText(event.prettyCreatedAt)) ~
+      (view.find[TextView](Id.eventDescription) <~ tvText(event.description)) ~
+      (view.find[TextView](Id.eventMoneyInvolved) <~ tvText(event.moneyInvolvedText)) ~
+      (view.find[TextView](Id.eventPeopleInvolved) <~ tvText(event.peopleInvolvedText)) ~
+      (view.find[ImageView](Id.eventpaymentIcon) <~ AsyncImageTweaks.srcImage(event.eventPhoto.getOrElse("http://fb.com"), R.drawable.user_placeholder)) ~
+      (view.find[TextView](Id.eventPayment) <~ tvText(event.paymentText))
 
 }

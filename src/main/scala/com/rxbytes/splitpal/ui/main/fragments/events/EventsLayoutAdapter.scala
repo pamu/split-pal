@@ -14,7 +14,7 @@ class EventsLayoutAdapter(implicit activityContextWrapper: ActivityContextWrappe
 
   var eventImage = slot[ImageView]
   var eventName = slot[TextView]
-  var eventDesc = slot[TextView]
+  var eventDescription = slot[TextView]
   var eventMoneyInvolved = slot[TextView]
   var eventPeopleInvolved = slot[TextView]
   var eventPayment = slot[TextView]
@@ -24,19 +24,20 @@ class EventsLayoutAdapter(implicit activityContextWrapper: ActivityContextWrappe
   def layout = getUi(
     l[CardView](
       l[LinearLayout](
-        w[ImageView] <~ wire(eventImage) <~ eventImageStyle,
+        w[ImageView] <~ wire(eventImage) <~ eventImageStyle <~ id(Id.eventImage),
         l[LinearLayout](
           l[LinearLayout](
             w[TextView] <~ wire(eventName) <~ eventNameStyle <~ id(Id.eventName),
-            w[TextView] <~ wire(eventCreatedAt) <~ eventCreatedAtStyle
+            w[TextView] <~ wire(eventCreatedAt) <~ eventCreatedAtStyle <~ id(Id.eventCreatedAt)
           ) <~ titleStyle,
+          w[TextView] <~ wire(eventDescription) <~ eventDescriptionStyle <~ id(Id.eventDescription),
           l[LinearLayout](
-            w[TextView] <~ wire(eventMoneyInvolved) <~ eventMoneyInvolvedStyle,
-            w[TextView] <~ wire(eventPeopleInvolved) <~ eventPeopleInvolvedStyle
+            w[TextView] <~ wire(eventMoneyInvolved) <~ eventMoneyInvolvedStyle <~ id(Id.eventMoneyInvolved),
+            w[TextView] <~ wire(eventPeopleInvolved) <~ eventPeopleInvolvedStyle <~ id(Id.eventPeopleInvolved)
           ) <~ moneyPeopleStyle,
           l[LinearLayout](
-            w[ImageView] <~ wire(paymentIcon) <~ paymentIconStyle,
-            w[TextView] <~ wire(eventPayment) <~ eventPaymentStyle
+            w[ImageView] <~ wire(paymentIcon) <~ paymentIconStyle <~ id(Id.eventPaymentIcon),
+            w[TextView] <~ wire(eventPayment) <~ eventPaymentStyle <~ id(Id.eventPayment)
           ) <~ paymentStyle
         ) <~ eventContentStyle
       ) <~ eventStyle

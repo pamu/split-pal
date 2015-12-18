@@ -34,8 +34,7 @@ trait EventLayoutStyles {
       llGravity(Gravity.CENTER)
 
   def eventNameStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
-    llMatchWeightVertical +
-      vMatchParent +
+    vWrapContent +
       tvColorResource(R.color.colorPrimary) +
       tvMaxLines(1) +
       tvEllipsize(TruncateAt.END) +
@@ -82,5 +81,7 @@ trait EventLayoutStyles {
     vMatchWidth +
       llHorizontal
 
+  def eventDescriptionStyle(implicit contextWrapper: ContextWrapper) =
+    vMatchWidth
 
 }
