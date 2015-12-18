@@ -5,6 +5,6 @@
     <string name="events">Events</string>
     <string name="contacts">Contacts</string>
     <string name="menu_search">Search</string>
-    <string name="error">Error Loading</string>
-    <string name="empty">Contents Empty</string>
+    <string name="error">Error Loading Content</string>
+    <string name="empty">Content Empty</string>
 </resources>

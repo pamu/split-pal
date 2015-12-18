@@ -29,6 +29,28 @@
                 android:dividerHeight="0dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+        <LinearLayout
+                android:id="@+id/notif_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+            <TextView
+                    android:id="@+id/msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Message"
+                    android:textSize="@dimen/padding_medium"
+                    android:textColor="@color/colorPrimary"/>
+            <Button android:id="@+id/btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Reload"
+                    android:textColor="@color/colorPrimary"/>
+        </LinearLayout>
+
     </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
