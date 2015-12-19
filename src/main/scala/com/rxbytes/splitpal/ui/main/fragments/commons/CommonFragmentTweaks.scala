@@ -1,16 +1,18 @@
 package com.rxbytes.splitpal.ui.main.fragments.commons
 
 import android.graphics.Color
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.View
-import android.widget.BaseAdapter
+import android.widget.AbsListView.OnScrollListener
+import android.widget.{AbsListView, ListView, BaseAdapter}
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import com.fortysevendeg.macroid.extras.ViewTweaks._
 import com.fortysevendeg.macroid.extras.TextTweaks._
 import com.rxbytes.splitpal.{TR, TypedResource, R}
 import com.rxbytes.splitpal.ui.components.IconTypes._
 import com.rxbytes.splitpal.ui.components.PathMorphDrawable
-import macroid.{Contexts, Ui, ContextWrapper}
+import macroid.{Tweak, Contexts, Ui, ContextWrapper}
 import macroid.FullDsl._
 
 /**
@@ -65,6 +67,7 @@ trait CommonFragmentTweaks {
 
   def init(implicit rootView: View): Ui[_] = {
     (listView <~ vVisible) ~
+      hideFabAfter(1) ~
       (progressBar <~ vGone) ~
       (notifPlaceholder <~ vGone)
   }
@@ -103,5 +106,24 @@ trait CommonFragmentTweaks {
       case 0 => empty
       case _ => adapter(baseAdapter)
     }
+
+  def hideFabAfter(itemCount: Int)(implicit rootView: View): Ui[_] =
+    listView <~ Tweak[ListView](_.setOnScrollListener(new OnScrollListener {
+
+      override def onScrollStateChanged(absListView: AbsListView, i: Int): Unit = {}
+
+      override def onScroll(absListView: AbsListView, i: Int, i1: Int, i2: Int): Unit = {
+        if (i > itemCount) {
+          runUi {
+            fabActionButton <~ Tweak[FloatingActionButton](_.hide())
+          }
+        } else {
+          runUi {
+            fabActionButton <~ Tweak[FloatingActionButton](_.show())
+          }
+        }
+      }
+
+    }))
 
 }

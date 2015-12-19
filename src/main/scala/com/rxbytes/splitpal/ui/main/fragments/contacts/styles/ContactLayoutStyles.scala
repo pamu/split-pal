@@ -1,5 +1,6 @@
 package com.rxbytes.splitpal.ui.main.fragments.contacts.styles
 
+import android.graphics.Color
 import android.support.v7.widget.CardView
 import android.text.TextUtils.TruncateAt
 import android.view.Gravity
@@ -36,7 +37,7 @@ trait ContactLayoutStyles {
     llMatchWeightVertical +
       vMatchParent +
       tvSizeResource(R.dimen.title_font) +
-      tvColorResource(R.color.colorPrimary) +
+      tvColor(Color.BLACK) +
       tvMaxLines(1) +
       tvEllipsize(TruncateAt.END) +
       tvBold
@@ -46,8 +47,8 @@ trait ContactLayoutStyles {
       vMatchParent +
       tvNormalLight +
       tvItalicLight +
+      tvColor(Color.GRAY) +
       tvSizeResource(R.dimen.status_font) +
-      tvColorResource(R.color.colorPrimary) +
       llLayoutMargin(0,
         resGetDimensionPixelSize(R.dimen.padding_small),
         resGetDimensionPixelSize(R.dimen.padding_tiny),
@@ -64,8 +65,8 @@ trait ContactLayoutStyles {
       llGravity(Gravity.CENTER) +
       llHorizontal
 
-//  def lineStyle(implicit contextWrapper: ContextWrapper): Tweak[ImageView] =
-//    lp[LinearLayout](MATCH_PARENT, resGetDimensionPixelSize(R.dimen.line)) +
-//      vBackgroundColorResource(R.color.colorPrimary)
+  //  def lineStyle(implicit contextWrapper: ContextWrapper): Tweak[ImageView] =
+  //    lp[LinearLayout](MATCH_PARENT, resGetDimensionPixelSize(R.dimen.line)) +
+  //      vBackgroundColorResource(R.color.colorPrimary)
 
 }

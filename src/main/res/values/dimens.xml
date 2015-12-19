@@ -16,4 +16,5 @@
     <!-- fonts -->
     <dimen name="title_font">16sp</dimen>
     <dimen name="status_font">12sp</dimen>
+
 </resources>

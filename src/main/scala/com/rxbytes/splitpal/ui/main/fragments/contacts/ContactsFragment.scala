@@ -35,7 +35,9 @@ class ContactsFragment
     runUi(init ~ fetchContacts(fragmentContextWrapper))
     contactsLayout **/
 
-    implicit val view = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container)
+    setHasOptionsMenu(true)
+
+    implicit val view = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container, false)
     runUi(fabActionButton <~ ivSrc(super.fabDrawable) <~ On.click {
       Ui {
         fabActionButton.foreach(Snackbar.make(_, "Add new Contact", Snackbar.LENGTH_LONG).show())
@@ -55,7 +57,7 @@ class ContactsFragment
   }
 
   override def onCreateOptionsMenu(menu: Menu, inflater: MenuInflater): Unit = {
-    inflater.inflate(R.menu.main_menu, menu)
+    inflater.inflate(R.menu.contacts_menu, menu)
     super.onCreateOptionsMenu(menu, inflater)
   }
 

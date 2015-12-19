@@ -60,13 +60,23 @@ class EventsViewHolder(adapter: EventsLayoutAdapter)
 object EventsViewHolder extends IdGeneration {
 
   def staticBind(view: View, event: Event)(implicit activityContextWrapper: ActivityContextWrapper): Ui[_] =
-    (view.find[ImageView](Id.eventImage) <~ AsyncImageTweaks.srcImage(event.eventPhoto.getOrElse("http://fb.com"), R.drawable.user_placeholder)) ~
+    (view.find[ImageView](Id.eventImage) <~ AsyncImageTweaks.srcImage(
+      event.eventPhoto.getOrElse("http://fb.com"),
+      R.drawable.user_placeholder)) ~
       (view.find[TextView](Id.eventName) <~ tvText(event.name)) ~
       (view.find[TextView](Id.eventCreatedAt) <~ tvText(event.prettyCreatedAt)) ~
       (view.find[TextView](Id.eventDescription) <~ tvText(event.description)) ~
+      (view.find[ImageView](Id.moneyIcon) <~ AsyncImageTweaks.srcImage(
+        event.eventPhoto.getOrElse("http://fb.com"),
+        R.drawable.user_placeholder)) ~
       (view.find[TextView](Id.eventMoneyInvolved) <~ tvText(event.moneyInvolvedText)) ~
+      (view.find[ImageView](Id.peopleIcon) <~ AsyncImageTweaks.srcImage(
+        event.eventPhoto.getOrElse("http://fb.com"),
+        R.drawable.user_placeholder)) ~
       (view.find[TextView](Id.eventPeopleInvolved) <~ tvText(event.peopleInvolvedText)) ~
-      (view.find[ImageView](Id.eventpaymentIcon) <~ AsyncImageTweaks.srcImage(event.eventPhoto.getOrElse("http://fb.com"), R.drawable.user_placeholder)) ~
+      (view.find[ImageView](Id.eventpaymentIcon) <~ AsyncImageTweaks.srcImage(
+        event.eventPhoto.getOrElse("http://fb.com"),
+        R.drawable.user_placeholder)) ~
       (view.find[TextView](Id.eventPayment) <~ tvText(event.paymentText))
 
 }

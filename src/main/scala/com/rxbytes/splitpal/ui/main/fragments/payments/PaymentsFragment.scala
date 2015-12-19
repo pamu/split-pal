@@ -20,7 +20,7 @@ class PaymentsFragment
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
 
-    implicit val rootView = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container)
+    implicit val rootView = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container, false)
 
     runUi {
       fabActionButton <~ ivSrc(super.fabDrawable) <~ On.click {

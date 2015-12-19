@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SplitPay</string>
+    <string name="refresh">Refresh</string>
     <string name="payments">Payments</string>
     <string name="events">Events</string>
     <string name="contacts">Contacts</string>

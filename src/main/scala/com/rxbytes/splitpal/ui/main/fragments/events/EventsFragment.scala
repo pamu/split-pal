@@ -3,13 +3,15 @@ package com.rxbytes.splitpal.ui.main.fragments.events
 import java.util.Date
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import android.support.design.widget.{FloatingActionButton, Snackbar}
 import android.support.v4.app.Fragment
 import android.view._
+import android.widget.AbsListView
+import android.widget.AbsListView.OnScrollListener
 import com.fortysevendeg.macroid.extras.ImageViewTweaks._
 import com.rxbytes.splitpal.ui.main.fragments.commons.CommonFragmentTweaks
-import com.rxbytes.splitpal.{TypedResource, TR}
-import macroid.{Ui, Contexts}
+import com.rxbytes.splitpal.{R, TypedResource, TR}
+import macroid.{Tweak, Ui, Contexts}
 import macroid.FullDsl._
 
 /**
@@ -29,14 +31,13 @@ class EventsFragment
     ))(event => Unit)))
     eLayout **/
 
-    implicit val rootView = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container)
+    setHasOptionsMenu(true)
+    implicit val rootView = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container, false)
+
+    runUi(init)
 
     runUi {
       val date = new Date()
-      date.setDate(5)
-      date.setYear(2015)
-      date.setMonth(11)
-
       adapter(EventsListAdapter(Seq.fill[Event](10)(Event(1,
         "Tamasha Movie", "Tamasha movie at Urvashi Theatre", date, None, 1000, 750, 4))))
     }
@@ -53,6 +54,7 @@ class EventsFragment
   }
 
   override def onCreateOptionsMenu(menu: Menu, inflater: MenuInflater): Unit = {
+    inflater.inflate(R.menu.events_menu, menu)
     super.onCreateOptionsMenu(menu, inflater)
   }
 
