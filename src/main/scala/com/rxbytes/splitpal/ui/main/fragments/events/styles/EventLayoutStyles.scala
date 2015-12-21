@@ -98,7 +98,8 @@ trait EventLayoutStyles extends IdGeneration {
   def moneyPeopleStyle(implicit contextWrapper: ContextWrapper) =
     vMatchWidth +
       llHorizontal +
-      llLayoutMargin(0 dp, 0 dp, 0 dp, 8 dp)
+      llLayoutMargin(0 dp, 0 dp, 0 dp, 8 dp) +
+      vGone
 
   def paymentIconStyle(implicit contextWrapper: ContextWrapper) = {
     val size = resGetDimensionPixelSize(R.dimen.payment_type_icon_size)
@@ -133,7 +134,8 @@ trait EventLayoutStyles extends IdGeneration {
   def paymentPeopleContentStyle(implicit contextWrapper: ContextWrapper) =
     vMatchWidth +
       llHorizontal +
-      llLayoutMargin(0 dp, 0 dp, 0 dp, 8 dp)
+      llLayoutMargin(0 dp, 0 dp, 0 dp, 8 dp) +
+      vGone
 
   def eventDescriptionStyle(implicit contextWrapper: ContextWrapper) =
     vMatchWidth +

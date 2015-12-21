@@ -110,18 +110,29 @@ trait CommonFragmentTweaks {
   def hideFabAfter(itemCount: Int)(implicit rootView: View): Ui[_] =
     listView <~ Tweak[ListView](_.setOnScrollListener(new OnScrollListener {
 
-      override def onScrollStateChanged(absListView: AbsListView, i: Int): Unit = {}
+      var lastVisibleItemPosition = listView.map(_.getFirstVisiblePosition).getOrElse(0)
+      var isScrollingUp = false
 
-      override def onScroll(absListView: AbsListView, i: Int, i1: Int, i2: Int): Unit = {
-        if (i > itemCount) {
-          runUi {
-            fabActionButton <~ Tweak[FloatingActionButton](_.hide())
-          }
-        } else {
+      override def onScrollStateChanged(absListView: AbsListView, i: Int): Unit = {
+        if (isScrollingUp) {
           runUi {
             fabActionButton <~ Tweak[FloatingActionButton](_.show())
           }
+        } else {
+          runUi {
+            fabActionButton <~ Tweak[FloatingActionButton](_.hide())
+          }
         }
+      }
+
+      override def onScroll(absListView: AbsListView, i: Int, i1: Int, i2: Int): Unit = {
+        if (lastVisibleItemPosition > i) {
+          isScrollingUp = true
+        } else if (lastVisibleItemPosition < i){
+          isScrollingUp = false
+        }
+
+        lastVisibleItemPosition = i
       }
 
     }))
