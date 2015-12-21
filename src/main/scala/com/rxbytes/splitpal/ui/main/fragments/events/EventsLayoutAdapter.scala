@@ -33,9 +33,15 @@ class EventsLayoutAdapter(implicit activityContextWrapper: ActivityContextWrappe
             ) <~ peopleStyle
           ) <~ moneyPeopleStyle,
           l[LinearLayout](
-            w[ImageView] <~ paymentIconStyle <~ id(Id.eventPaymentIcon),
-            w[TextView] <~ eventPaymentStyle <~ id(Id.eventPayment)
-          ) <~ paymentStyle
+            l[LinearLayout](
+              w[ImageView] <~ paymentIconStyle <~ id(Id.eventPaymentIcon),
+              w[TextView] <~ eventPaymentStyle <~ id(Id.eventPayment)
+            ) <~ paymentStyle,
+            l[LinearLayout](
+              w[ImageView] <~ eventPaymentPeopleIconStyle <~ id(Id.eventPaymentPeopleIcon),
+              w[TextView] <~ eventPaymentPeopleStyle <~ id(Id.eventPaymentPeoplePayment)
+            ) <~ paymentPeopleStyle
+          ) <~ paymentPeopleContentStyle
         ) <~ eventContentStyle
       ) <~ eventStyle
     ) <~ cardStyle

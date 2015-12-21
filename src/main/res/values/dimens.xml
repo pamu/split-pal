@@ -10,6 +10,7 @@
     <dimen name="padding_default_xlarge">16dp</dimen>
     <dimen name="circular_reveal_fab_stroke">2dp</dimen>
     <dimen name="main_list_avatar_size">64dp</dimen>
+    <dimen name="events_list_avatar_size">74dp</dimen>
     <dimen name="payment_type_icon_size">16dp</dimen>
     <dimen name="line">1dp</dimen>
 

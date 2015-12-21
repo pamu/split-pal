@@ -74,9 +74,13 @@ object EventsViewHolder extends IdGeneration {
         event.eventPhoto.getOrElse("http://fb.com"),
         R.drawable.user_placeholder)) ~
       (view.find[TextView](Id.eventPeopleInvolved) <~ tvText(event.peopleInvolvedText)) ~
-      (view.find[ImageView](Id.eventpaymentIcon) <~ AsyncImageTweaks.srcImage(
+      (view.find[ImageView](Id.eventPaymentIcon) <~ AsyncImageTweaks.srcImage(
         event.eventPhoto.getOrElse("http://fb.com"),
         R.drawable.user_placeholder)) ~
-      (view.find[TextView](Id.eventPayment) <~ tvText(event.paymentText))
+      (view.find[TextView](Id.eventPayment) <~ tvText(event.paymentText)) ~
+      (view.find[ImageView](Id.eventPaymentPeopleIcon) <~ AsyncImageTweaks.srcImage(
+        event.eventPhoto.getOrElse("http://fb.com"),
+        R.drawable.user_placeholder)) ~
+        (view.find[TextView](Id.eventPaymentPeople) <~ tvText(event.paymentPeopleText))
 
 }

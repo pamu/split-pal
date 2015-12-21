@@ -24,4 +24,6 @@ case class Event(id: Int,
 
   def peopleInvolvedText: String = s"$peopleInvolved people"
 
+  def paymentPeopleText: String = "3 owe you"
+
 }

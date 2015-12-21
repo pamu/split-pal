@@ -22,7 +22,7 @@ import scala.language.postfixOps
 trait EventLayoutStyles extends IdGeneration {
 
   def eventImageStyle(implicit contextWrapper: ContextWrapper) = {
-    val size = resGetDimensionPixelSize(R.dimen.main_list_avatar_size)
+    val size = resGetDimensionPixelSize(R.dimen.events_list_avatar_size)
     lp[LinearLayout](size, size) +
       ivScaleType(ScaleType.CENTER_CROP) +
       ivSrc(R.drawable.user_placeholder) +
@@ -74,13 +74,11 @@ trait EventLayoutStyles extends IdGeneration {
     llWrapWeightHorizontal
 
   def moneyStyle(implicit contextWrapper: ContextWrapper) =
-    llHorizontal +
-      vWrapContent +
-      llLayoutMargin(0 dp, 0 dp, 8 dp, 0 dp)
+    llWrapWeightHorizontal
 
-//  def verticalLineStyle(implicit contextWrapper: ContextWrapper): Tweak[ImageView] =
-//      lp[LinearLayout](resGetDimensionPixelSize(R.dimen.line), MATCH_PARENT) +
-//        vBackgroundColorResource(R.color.colorPrimary)
+  //  def verticalLineStyle(implicit contextWrapper: ContextWrapper): Tweak[ImageView] =
+  //      lp[LinearLayout](resGetDimensionPixelSize(R.dimen.line), MATCH_PARENT) +
+  //        vBackgroundColorResource(R.color.colorPrimary)
 
   def peopleIconStyle(implicit contextWrapper: ContextWrapper) = {
     val size = resGetDimensionPixelSize(R.dimen.payment_type_icon_size)
@@ -95,8 +93,7 @@ trait EventLayoutStyles extends IdGeneration {
     llWrapWeightHorizontal
 
   def peopleStyle(implicit contextWrapper: ContextWrapper) =
-    llHorizontal +
-      vWrapContent
+    llWrapWeightHorizontal
 
   def moneyPeopleStyle(implicit contextWrapper: ContextWrapper) =
     vMatchWidth +
@@ -116,6 +113,24 @@ trait EventLayoutStyles extends IdGeneration {
     llWrapWeightHorizontal
 
   def paymentStyle(implicit contextWrapper: ContextWrapper) =
+    llWrapWeightHorizontal
+
+  def eventPaymentPeopleIconStyle(implicit contextWrapper: ContextWrapper) = {
+    val size = resGetDimensionPixelSize(R.dimen.payment_type_icon_size)
+    lp[LinearLayout](size, size) +
+      ivScaleType(ScaleType.CENTER_CROP) +
+      ivSrc(R.drawable.user_placeholder) +
+      llLayoutGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT) +
+      vMargin(0 dp, 0 dp, 8 dp, 0 dp)
+  }
+
+  def eventPaymentPeopleStyle(implicit contextWrapper: ContextWrapper) =
+    llWrapWeightHorizontal
+
+  def paymentPeopleStyle(implicit contextWrapper: ContextWrapper) =
+    llWrapWeightHorizontal
+
+  def paymentPeopleContentStyle(implicit contextWrapper: ContextWrapper) =
     vMatchWidth +
       llHorizontal +
       llLayoutMargin(0 dp, 0 dp, 0 dp, 8 dp)
