@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.animation.{DecelerateInterpolator, AccelerateInterpolator}
 import android.view.{MenuItem, Menu}
 import com.rxbytes.splitpal.R
 import com.rxbytes.splitpal.ui.commons.SlidingTabLayout.TabColorizer
@@ -18,14 +19,15 @@ import macroid.FullDsl._
 class MainActivity
   extends AppCompatActivity
   with Contexts[AppCompatActivity]
-  with Layout {
+  with Layout
+  with ScrollDirectionListener {
 
   val LOG_TAG = classOf[MainActivity].getSimpleName
 
   protected override def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
     setContentView(layout)
-
+    runUi(initMainLayout(48))
     toolBar map setSupportActionBar
     val adapter = new SplitPalPageAdapter(getSupportFragmentManager)
     runUi(viewPager <~ vpAdapter(adapter) <~ vpOffscreenPageLimit(3))
@@ -49,11 +51,31 @@ class MainActivity
         }))
       }
     })
-
   }
 
   override def onCreateOptionsMenu(menu: Menu): Boolean = super.onCreateOptionsMenu(menu)
 
   override def onOptionsItemSelected(item: MenuItem): Boolean = super.onOptionsItemSelected(item)
 
+  override def onScrollUp(): Unit = {
+    toolbarContainer.map { toolbarContainer =>
+      runUi(initMainLayout(2 * 48 + 2))
+      toolbarContainer.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start()
+    }
+  }
+
+  override def onScrollDown(): Unit = {
+    toolbarContainer.map { toolbarContainer =>
+      toolBar.map { toolbar =>
+        runUi(initMainLayout(48 + 2))
+        toolbarContainer.animate().translationY(-toolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2)).start()
+      }
+    }
+  }
+
+}
+
+trait ScrollDirectionListener {
+  def onScrollUp(): Unit
+  def onScrollDown(): Unit
 }

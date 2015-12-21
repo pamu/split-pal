@@ -9,6 +9,7 @@ import android.widget.{AbsListView, ListView, BaseAdapter}
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import com.fortysevendeg.macroid.extras.ViewTweaks._
 import com.fortysevendeg.macroid.extras.TextTweaks._
+import com.rxbytes.splitpal.ui.main.ScrollDirectionListener
 import com.rxbytes.splitpal.{TR, TypedResource, R}
 import com.rxbytes.splitpal.ui.components.IconTypes._
 import com.rxbytes.splitpal.ui.components.PathMorphDrawable
@@ -67,7 +68,7 @@ trait CommonFragmentTweaks {
 
   def init(implicit rootView: View): Ui[_] = {
     (listView <~ vVisible) ~
-      hideFabAfter(1) ~
+      keepActivityPosted ~
       (progressBar <~ vGone) ~
       (notifPlaceholder <~ vGone)
   }
@@ -107,34 +108,41 @@ trait CommonFragmentTweaks {
       case _ => adapter(baseAdapter)
     }
 
-  def hideFabAfter(itemCount: Int)(implicit rootView: View): Ui[_] =
+  def onScroll(up: => Unit)(down: => Unit)(implicit rootView: View): Ui[_] =
     listView <~ Tweak[ListView](_.setOnScrollListener(new OnScrollListener {
 
       var lastVisibleItemPosition = listView.map(_.getFirstVisiblePosition).getOrElse(0)
       var isScrollingUp = false
 
-      override def onScrollStateChanged(absListView: AbsListView, i: Int): Unit = {
-        if (isScrollingUp) {
-          runUi {
-            fabActionButton <~ Tweak[FloatingActionButton](_.show())
-          }
-        } else {
-          runUi {
-            fabActionButton <~ Tweak[FloatingActionButton](_.hide())
-          }
-        }
-      }
+      override def onScrollStateChanged(absListView: AbsListView, i: Int): Unit =
+        if (isScrollingUp) up else down
 
       override def onScroll(absListView: AbsListView, i: Int, i1: Int, i2: Int): Unit = {
         if (lastVisibleItemPosition > i) {
           isScrollingUp = true
-        } else if (lastVisibleItemPosition < i){
+        } else if (lastVisibleItemPosition < i) {
           isScrollingUp = false
         }
-
         lastVisibleItemPosition = i
       }
 
     }))
+
+  def keepActivityPosted(implicit rootView: View): Ui[_] = {
+    fragmentContextWrapper.original.get.map {
+      activity =>
+        onScroll {
+          runUi {
+            fabActionButton <~ Tweak[FloatingActionButton](_.show())
+          }
+          activity.asInstanceOf[ScrollDirectionListener].onScrollUp()
+        } {
+          runUi {
+            fabActionButton <~ Tweak[FloatingActionButton](_.hide())
+          }
+          activity.asInstanceOf[ScrollDirectionListener].onScrollDown()
+        }
+    }.getOrElse(Ui())
+  }
 
 }
