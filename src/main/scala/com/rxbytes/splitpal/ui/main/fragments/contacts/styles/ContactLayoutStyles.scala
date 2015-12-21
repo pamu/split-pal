@@ -45,10 +45,7 @@ trait ContactLayoutStyles {
   def profileStatusStyle(implicit contextWrapper: ContextWrapper): Tweak[TextView] =
     llMatchWeightVertical +
       vMatchParent +
-      tvNormalLight +
-      tvItalicLight +
       tvColor(Color.GRAY) +
-      tvSizeResource(R.dimen.status_font) +
       llLayoutMargin(0,
         resGetDimensionPixelSize(R.dimen.padding_small),
         resGetDimensionPixelSize(R.dimen.padding_tiny),

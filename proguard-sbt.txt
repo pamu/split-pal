@@ -120,7 +120,7 @@
 # view res/layout/material_list.xml #generated:3
 -keep class android.support.design.widget.CoordinatorLayout { <init>(...); }
 
-# view res/layout/material_list.xml #generated:56
+# view res/layout/material_list.xml #generated:55
 -keep class android.support.design.widget.FloatingActionButton { <init>(...); }
 
 # view res/layout/design_layout_snackbar.xml #generated:18

@@ -4,6 +4,7 @@ import Libraries.playServices._
 import Libraries.apacheCommons._
 import Libraries.json._
 import Libraries.date._
+import Libraries.parse._
 import Libraries.graphics._
 import Libraries.test._
 import android.Keys._
@@ -45,6 +46,8 @@ libraryDependencies ++= Seq(
   json4s,
   picasso,
   prettytime,
+  parse,
+  parseBolts,
   specs2,
   mockito,
   androidTest,

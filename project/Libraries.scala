@@ -3,6 +3,7 @@ import sbt._
 object Libraries {
 
   def onCompile(dep: ModuleID): ModuleID = dep % "compile"
+
   def onTest(dep: ModuleID): ModuleID = dep % "test"
 
   //Plugins:
@@ -51,7 +52,7 @@ object Libraries {
   object macroid {
 
     def macroid(module: String = "") =
-      "org.macroid" %% s"macroid${if(!module.isEmpty) s"-$module" else ""}" % Versions.macroidV
+      "org.macroid" %% s"macroid${if (!module.isEmpty) s"-$module" else ""}" % Versions.macroidV
 
     lazy val macroidRoot = macroid()
     lazy val macroidExtras = "com.fortysevendeg" %% "macroid-extras" % Versions.macroidExtrasV
@@ -59,9 +60,9 @@ object Libraries {
 
   object apacheCommons {
     def apacheCommonsDep(module: String) = "org.apache.commons" % module % Versions.apacheCommonsV
-    
+
     lazy val apacheCommonsLang = apacheCommonsDep("commons-lang3")
-    
+
   }
 
   object json {
@@ -74,6 +75,11 @@ object Libraries {
 
   object date {
     lazy val prettytime = "org.ocpsoft.prettytime" % "prettytime" % Versions.prettytimeV
+  }
+
+  object parse {
+    lazy val parse = "com.parse" % "parse-android" % Versions.parse
+    lazy val parseBolts = "com.parse.bolts" % "bolts-android" % Versions.parseBolts
   }
 
   object test {

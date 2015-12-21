@@ -15,4 +15,6 @@ object Versions {
   val mockitoV = "3.0-M2"
   val picassoV = "2.5.0"
   val prettytimeV = "4.0.1.Final"
+  val parse = "1+"
+  val parseBolts = "1+"
 }
