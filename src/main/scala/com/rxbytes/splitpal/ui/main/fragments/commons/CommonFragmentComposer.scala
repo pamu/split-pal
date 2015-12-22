@@ -9,17 +9,18 @@ import android.widget.{AbsListView, ListView, BaseAdapter}
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import com.fortysevendeg.macroid.extras.ViewTweaks._
 import com.fortysevendeg.macroid.extras.TextTweaks._
+
 import com.rxbytes.splitpal.ui.main.ScrollDirectionListener
 import com.rxbytes.splitpal.{TR, TypedResource, R}
 import com.rxbytes.splitpal.ui.components.IconTypes._
 import com.rxbytes.splitpal.ui.components.PathMorphDrawable
-import macroid.{Tweak, Contexts, Ui, ContextWrapper}
+import macroid._
 import macroid.FullDsl._
 
 /**
   * Created by pnagarjuna on 17/12/15.
   */
-trait CommonFragmentTweaks {
+trait CommonFragmentComposer extends IdGeneration {
 
   self: Contexts[Fragment] =>
 

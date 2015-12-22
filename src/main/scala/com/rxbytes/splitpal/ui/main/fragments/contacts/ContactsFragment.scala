@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import android.view._
 import com.fortysevendeg.macroid.extras.ImageViewTweaks._
-import com.rxbytes.splitpal.ui.main.fragments.commons.CommonFragmentTweaks
+import com.rxbytes.splitpal.ui.main.fragments.commons.CommonFragmentComposer
 import com.rxbytes.splitpal.{TR, TypedResource, R}
 import macroid.{Ui, Contexts}
 import macroid.FullDsl._
@@ -17,7 +17,7 @@ import macroid.FullDsl._
 class ContactsFragment
   extends Fragment
   with Contexts[Fragment]
-  with CommonFragmentTweaks {
+  with CommonFragmentComposer {
 
   val LOG_TAG = classOf[ContactsFragment].getSimpleName()
 
@@ -37,7 +37,7 @@ class ContactsFragment
 
     setHasOptionsMenu(true)
 
-    implicit val view = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container, false)
+    implicit val view = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.fragment_layout, container, false)
     runUi(fabActionButton <~ ivSrc(super.fabDrawable) <~ On.click {
       Ui {
         fabActionButton.foreach(Snackbar.make(_, "Add new Contact", Snackbar.LENGTH_LONG).show())

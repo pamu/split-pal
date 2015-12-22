@@ -2,19 +2,14 @@ package com.rxbytes.splitpal.ui.main.fragments.events
 
 import java.util.Date
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.{FloatingActionButton, Snackbar}
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view._
-import android.widget.AbsListView
-import android.widget.AbsListView.OnScrollListener
 import com.fortysevendeg.macroid.extras.ImageViewTweaks._
-import com.rxbytes.splitpal.ui.main.ScrollDirectionListener
-import com.rxbytes.splitpal.ui.main.fragments.commons.CommonFragmentTweaks
+import com.rxbytes.splitpal.ui.main.fragments.commons.CommonFragmentComposer
 import com.rxbytes.splitpal.{R, TypedResource, TR}
-import macroid.{Tweak, Ui, Contexts}
+import macroid.{Ui, Contexts}
 import macroid.FullDsl._
 
 /**
@@ -23,7 +18,7 @@ import macroid.FullDsl._
 class EventsFragment
   extends Fragment
   with Contexts[Fragment]
-  with CommonFragmentTweaks {
+  with CommonFragmentComposer {
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     /**
@@ -35,7 +30,7 @@ class EventsFragment
     eLayout **/
 
     setHasOptionsMenu(true)
-    implicit val rootView = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.material_list, container, false)
+    implicit val rootView = TypedResource.TypedLayoutInflater(inflater).inflate(TR.layout.fragment_layout, container, false)
 
     runUi(init)
 

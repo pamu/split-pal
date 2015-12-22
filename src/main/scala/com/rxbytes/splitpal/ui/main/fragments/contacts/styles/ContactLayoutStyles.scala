@@ -62,8 +62,9 @@ trait ContactLayoutStyles {
       llGravity(Gravity.CENTER) +
       llHorizontal
 
-  //  def lineStyle(implicit contextWrapper: ContextWrapper): Tweak[ImageView] =
-  //    lp[LinearLayout](MATCH_PARENT, resGetDimensionPixelSize(R.dimen.line)) +
-  //      vBackgroundColorResource(R.color.colorPrimary)
+  /**
+  def lineStyle(implicit contextWrapper: ContextWrapper): Tweak[ImageView] =
+    lp[LinearLayout](MATCH_PARENT, resGetDimensionPixelSize(R.dimen.line)) +
+      vBackgroundColorResource(R.color.colorPrimary) **/
 
 }

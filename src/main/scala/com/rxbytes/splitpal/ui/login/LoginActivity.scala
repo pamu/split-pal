@@ -18,9 +18,6 @@ class LoginActivity
   protected override def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
     setContentView(layout)
-
-    toolBar map setSupportActionBar
-
     finish()
     startActivity(new Intent(getApplication, classOf[MainActivity]))
   }
