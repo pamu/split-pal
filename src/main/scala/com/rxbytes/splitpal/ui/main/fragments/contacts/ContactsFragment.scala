@@ -10,6 +10,7 @@ import com.rxbytes.splitpal.ui.main.fragments.commons.CommonFragmentComposer
 import com.rxbytes.splitpal.{TR, TypedResource, R}
 import macroid.{Ui, Contexts}
 import macroid.FullDsl._
+import com.rxbytes.splitpal.ui.main.fragments.contacts.ContactsFetcher._
 
 /**
   * Created by pnagarjuna on 05/12/15.
@@ -48,7 +49,7 @@ class ContactsFragment
   }
 
   def fetchContacts(implicit rootView: View): Ui[_] = {
-    ContactsUtils.contactsAsync mapUi { contacts =>
+    contactsAsync mapUi { contacts =>
       reloadList(new ContactsListAdapter(contacts)(contact => Unit))
     } recoverUi { case ex =>
       failed
