@@ -27,7 +27,7 @@ class MainActivity
   protected override def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
     setContentView(layout)
-    runUi(initMainLayout(48))
+    runUi(initMainLayout(48 + 8))
     toolBar map setSupportActionBar
     val adapter = new SplitPalPageAdapter(getSupportFragmentManager)
     runUi(viewPager <~ vpAdapter(adapter) <~ vpOffscreenPageLimit(3))
@@ -59,7 +59,7 @@ class MainActivity
 
   override def onScrollUp(): Unit = {
     toolbarContainer.map { toolbarContainer =>
-      runUi(initMainLayout(2 * 48 + 2))
+      runUi(initMainLayout(2 * 48 + 8))
       toolbarContainer.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start()
     }
   }
@@ -67,7 +67,7 @@ class MainActivity
   override def onScrollDown(): Unit = {
     toolbarContainer.map { toolbarContainer =>
       toolBar.map { toolbar =>
-        runUi(initMainLayout(48 + 2))
+        runUi(initMainLayout(48 + 8))
         toolbarContainer.animate().translationY(-toolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2)).start()
       }
     }
