@@ -61,23 +61,9 @@ class MainActivity
 
   override def onOptionsItemSelected(item: MenuItem): Boolean = super.onOptionsItemSelected(item)
 
-  override def onScrollUp(): Unit = {
-    appBarLayout.map { layout =>
-      pagerContainer.map { container =>
-        container.setPadding(0, 48 dp, 0, 0)
-      }
-      layout.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start()
-    }
-  }
+  override def onScrollUp(): Unit = {}
 
-  override def onScrollDown(): Unit = {
-    appBarLayout.map { layout =>
-      layout.animate().translationY(-layout.getHeight).setInterpolator(new AccelerateInterpolator()).start()
-      pagerContainer.map { container =>
-        container.setPadding(0, 0, 0, 0)
-      }
-    }
-  }
+  override def onScrollDown(): Unit = {}
 
 }
 
