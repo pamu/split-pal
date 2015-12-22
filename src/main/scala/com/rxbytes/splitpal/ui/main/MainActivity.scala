@@ -3,6 +3,8 @@ package com.rxbytes.splitpal.ui.main
 import android.os.Bundle
 import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.animation.{DecelerateInterpolator, AccelerateInterpolator}
 import android.view.{MenuItem, Menu}
 import com.rxbytes.splitpal.ui.commons.SlidingTabLayout
 import com.rxbytes.splitpal.ui.commons.SlidingTabLayout.TabColorizer
@@ -10,6 +12,7 @@ import com.rxbytes.splitpal.{R, TypedFindView}
 import macroid.{Tweak, Contexts}
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import com.fortysevendeg.macroid.extras.ViewPagerTweaks._
+import scala.language.postfixOps
 import macroid.FullDsl._
 
 /**
@@ -26,8 +29,9 @@ class MainActivity
 
   protected override def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
-
     setContentView(R.layout.main_layout)
+
+    toolbar map setSupportActionBar
 
     val adapter = new SplitPalPageAdapter(getSupportFragmentManager)
     runUi(pager <~ vpAdapter(adapter) <~ vpOffscreenPageLimit(3))
@@ -45,7 +49,7 @@ class MainActivity
           override def onPageScrolled(i: Int, v: Float, i1: Int): Unit = {}
 
           override def onPageSelected(i: Int): Unit = {
-
+            Log.d(LOG_TAG, s"page selected $i")
           }
 
         })))
@@ -58,9 +62,21 @@ class MainActivity
   override def onOptionsItemSelected(item: MenuItem): Boolean = super.onOptionsItemSelected(item)
 
   override def onScrollUp(): Unit = {
+    appBarLayout.map { layout =>
+      pagerContainer.map { container =>
+        container.setPadding(0, 48 dp, 0, 0)
+      }
+      layout.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start()
+    }
   }
 
   override def onScrollDown(): Unit = {
+    appBarLayout.map { layout =>
+      layout.animate().translationY(-layout.getHeight).setInterpolator(new AccelerateInterpolator()).start()
+      pagerContainer.map { container =>
+        container.setPadding(0, 0, 0, 0)
+      }
+    }
   }
 
 }

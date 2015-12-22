@@ -8,6 +8,7 @@ import com.rxbytes.splitpal.{TR, TypedFindView}
 trait MainComposer {
   self: TypedFindView =>
 
+  lazy val pagerContainer = Option(findView(TR.pager_container))
   lazy val appBarLayout = Option(findView(TR.app_bar_layout))
   lazy val toolbar = Option(findView(TR.toolbar))
   lazy val slidingTabLayout = Option(findView(TR.sliding_tab_layout))
