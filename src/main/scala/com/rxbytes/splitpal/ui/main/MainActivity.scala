@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.animation.{DecelerateInterpolator, AccelerateInterpolator}
 import android.view.{MenuItem, Menu}
 import com.rxbytes.splitpal.ui.commons.SlidingTabLayout
 import com.rxbytes.splitpal.ui.commons.SlidingTabLayout.TabColorizer

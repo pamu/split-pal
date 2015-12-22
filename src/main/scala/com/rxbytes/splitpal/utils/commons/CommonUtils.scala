@@ -1,17 +1,15 @@
-package com.rxbytes.splitpal.utils
+package com.rxbytes.splitpal.utils.commons
 
 import android.database.Cursor
 
 import scala.annotation.tailrec
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{Future, ExecutionContext}
 import scala.util.{Failure, Success, Try}
 
 /**
-  * Created by pnagarjuna on 09/12/15.
+  * Created by pnagarjuna on 22/12/15.
   */
-object Contacts {
-
-  val LOG_TAG = Contacts.getClass.getSimpleName
+object CommonUtils {
 
   def getListFromCursor[T](cursor: Option[Cursor], conversionFunction: Cursor => T): Seq[T] = {
     @tailrec
@@ -28,7 +26,7 @@ object Contacts {
 
     cursor match {
       case Some(cursorObject) if cursorObject.moveToFirst() =>
-       val entityList = getListFromEntityLoop(cursorObject, Seq.empty[T])
+        val entityList = getListFromEntityLoop(cursorObject, Seq.empty[T])
         cursorObject.close()
         entityList
       case _ => Seq.empty[T]

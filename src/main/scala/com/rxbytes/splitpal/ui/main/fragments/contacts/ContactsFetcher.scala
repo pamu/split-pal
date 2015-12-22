@@ -1,12 +1,14 @@
 package com.rxbytes.splitpal.ui.main.fragments.contacts
 
 import android.database.Cursor
-import com.rxbytes.splitpal.utils.Contacts
+import com.rxbytes.splitpal.utils.commons.CommonUtils._
 import contacts.PhoneContactColumns
 import macroid.ContextWrapper
 
 import scala.concurrent.Future
 import scala.util.Try
+
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * Created by pnagarjuna on 09/12/15.
@@ -18,7 +20,7 @@ case class CompleteContact(contactId: Int,
                            email: String,
                            emailData: String)
 
-object ContactsUtils {
+object ContactsFetcher {
 
   case class ContactWithDisplayName(contactId: Int,
                                     displayName: String,
@@ -55,7 +57,7 @@ object ContactsUtils {
       ContactWithDisplayName(id, displayName, hasPhoneNumber.toInt > 0)
     }
 
-    Contacts.getListFromCursor(cursor, conversionFunction)
+    getListFromCursor(cursor, conversionFunction)
 
   }
 
@@ -84,7 +86,7 @@ object ContactsUtils {
         )
       }
 
-      Contacts.getListFromCursor(cursor, conversionFunction).map { contact =>
+      getListFromCursor(cursor, conversionFunction).map { contact =>
         ContactWithNameAndPhone(contact.contactId, contactWithDisplayName.displayName, contact.phoneNumber)
       }
     }
@@ -100,10 +102,8 @@ object ContactsUtils {
       }
   }
 
-  import scala.concurrent.ExecutionContext.Implicits.global
-
   def contactsAsync(implicit contextWrapper: ContextWrapper): Future[Seq[Contact]] =
-    Contacts.tryToFuture(Try(contacts))
+    tryToFuture(Try(contacts))
 
 
 }
