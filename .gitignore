@@ -22,4 +22,3 @@ project/project
 .eclipse
 .settings
 .sbt_server
-src/main/scala/com/rxbytes/splitpal/app/SplitPay.scala
