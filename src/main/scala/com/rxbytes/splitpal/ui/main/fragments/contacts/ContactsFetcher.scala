@@ -33,7 +33,7 @@ object ContactsFetcher {
                                      displayName: String,
                                      phoneNumber: String)
 
-  def queryContactsWithDisplayName(implicit contextWrapper: ContextWrapper): Seq[ContactWithDisplayName] = {
+  def queryContactsWithDisplayName(limit: Int, offset: Int)(implicit contextWrapper: ContextWrapper): Seq[ContactWithDisplayName] = {
 
     val cursor = Option[Cursor](
       contextWrapper.application.getContentResolver
@@ -46,7 +46,7 @@ object ContactsFetcher {
           ),
           s"${PhoneContactColumns.HAS_PHONE_NUMBER} != ?",
           Array("0"),
-          null
+          s" ${PhoneContactColumns._ID} ASC limit $limit offset $offset"
         )
     )
 
@@ -94,7 +94,7 @@ object ContactsFetcher {
   }
 
   def contacts(implicit contextWrapper: ContextWrapper): Seq[Contact] = {
-    queryContactsForPhoneNumber(queryContactsWithDisplayName)
+    queryContactsForPhoneNumber(queryContactsWithDisplayName(10, 0))
       .map { contact => contact.phoneNumber -> contact }(scala.collection.breakOut).toMap
       .map { pair => pair._2 }.toSeq
       .map { contactWithNameAndPhone =>

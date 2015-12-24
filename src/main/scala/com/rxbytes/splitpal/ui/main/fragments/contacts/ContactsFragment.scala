@@ -52,6 +52,8 @@ class ContactsFragment
     contactsAsync mapUi { contacts =>
       reloadList(new ContactsListAdapter(contacts)(contact => Unit))
     } recoverUi { case ex =>
+      Log.e(LOG_TAG, ex.getMessage)
+      ex.printStackTrace()
       failed
     }
     loading
