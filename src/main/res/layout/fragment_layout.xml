@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:wheel="http://schemas.android.com/apk/res-auto"
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,13 +15,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminate="true"
-                android:visibility="gone"/>
+        <!--<ProgressBar-->
+                <!--android:id="@+id/progress_bar"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:indeterminate="true"-->
+                <!--android:visibility="gone"/>-->
+
+        <com.pnikosis.materialishprogress.ProgressWheel
+                android:id="@+id/main_progress_wheel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:visibility="gone"
+                wheel:matProg_barColor="@color/colorPrimary"
+                wheel:matProg_barWidth="6dp"
+                android:clickable="true"
+                wheel:matProg_circleRadius="30dp"
+                wheel:matProg_progressIndeterminate="true"/>
 
         <LinearLayout
                 android:id="@+id/list_view_container"
@@ -35,12 +48,17 @@
                     android:dividerHeight="0dp"
                     android:clipToPadding="false"
                     android:scrollbarStyle="outsideOverlay"/>
-            <ProgressBar
-                    android:id="@+id/list_view_progress_bar"
+            <com.pnikosis.materialishprogress.ProgressWheel
+                    android:id="@+id/list_view_progress_wheel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    android:visibility="gone"/>
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    wheel:matProg_barColor="@color/colorPrimary"
+                    wheel:matProg_barWidth="6dp"
+                    android:clickable="true"
+                    wheel:matProg_circleRadius="30dp"
+                    wheel:matProg_progressIndeterminate="true"/>
         </LinearLayout>
 
         <LinearLayout

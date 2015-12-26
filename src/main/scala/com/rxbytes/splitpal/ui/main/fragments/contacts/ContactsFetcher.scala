@@ -82,7 +82,7 @@ object ContactsFetcher {
         val number = cursor.getString(cursor.getColumnIndex(PhoneContactColumns.NUMBER))
         ContactWithPhoneNumber(
           id,
-          number.split("\\s+").map(_.trim).reduce(_ + _)
+          number.split("\\s+").map(_.trim).reduce(_ + _).replaceAll("[\\D]", "")
         )
       }
 
@@ -93,8 +93,8 @@ object ContactsFetcher {
 
   }
 
-  def contacts(implicit contextWrapper: ContextWrapper): Seq[Contact] = {
-    queryContactsForPhoneNumber(queryContactsWithDisplayName(10, 0))
+  def contacts(limit: Int, offset: Int)(implicit contextWrapper: ContextWrapper): Seq[Contact] = {
+    queryContactsForPhoneNumber(queryContactsWithDisplayName(limit, offset))
       .map { contact => contact.phoneNumber -> contact }(scala.collection.breakOut).toMap
       .map { pair => pair._2 }.toSeq
       .map { contactWithNameAndPhone =>
@@ -102,8 +102,8 @@ object ContactsFetcher {
       }
   }
 
-  def contactsAsync(implicit contextWrapper: ContextWrapper): Future[Seq[Contact]] =
-    tryToFuture(Try(contacts))
+  def contactsAsync(limit: Int, offset: Int)(implicit contextWrapper: ContextWrapper): Future[Seq[Contact]] =
+    tryToFuture(Try(contacts(limit, offset)))
 
 
 }

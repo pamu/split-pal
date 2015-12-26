@@ -16,11 +16,19 @@ import scala.language.postfixOps
 /**
   * Created by pnagarjuna on 07/12/15.
   */
-class ContactsListAdapter(contacts: Seq[Contact])(clickListener: Contact => Unit)
+class ContactsListAdapter(initialItems: Seq[Contact])(clickListener: Contact => Unit)
                          (implicit activityContextWrapper: ActivityContextWrapper)
   extends BaseAdapter {
 
   val LOG_TAG = classOf[ContactsListAdapter].getSimpleName
+
+  //immutable data structure assigned to mutable variable
+  var contacts = initialItems
+
+  def addItems(moreItems: Seq[Contact]): Unit = {
+    contacts = contacts ++ moreItems
+    notifyDataSetChanged()
+  }
 
   override def getItemId(i: Int): Long = contacts(i).hashCode()
 

@@ -41,9 +41,19 @@ trait CommonFragmentComposer extends IdGeneration {
     listView
   }
 
-  def progressBar(implicit rootView: View) = {
-    val progressBar = Option(TypedResource.TypedView(rootView).findView(TR.progress_bar))
-    progressBar
+  def listViewContainer(implicit rootView: View) = {
+    val listViewContainer = Option(TypedResource.TypedView(rootView).findView(TR.list_view_container))
+    listViewContainer
+  }
+
+  def listViewProgressWheel(implicit rootView: View) = {
+    val listViewProgressWheel = Option(TypedResource.TypedView(rootView).findView(TR.list_view_progress_wheel))
+    listViewProgressWheel
+  }
+
+  def mainProgressWheel(implicit rootView: View) = {
+    val mainProgressWheel = Option(TypedResource.TypedView(rootView).findView(TR.main_progress_wheel))
+    mainProgressWheel
   }
 
   def btn(implicit rootView: View) = {
@@ -66,30 +76,29 @@ trait CommonFragmentComposer extends IdGeneration {
     placeholder
   }
 
-
   def init(implicit rootView: View): Ui[_] = {
     (listView <~ vVisible) ~
       keepActivityPosted ~
-      (progressBar <~ vGone) ~
+      (mainProgressWheel <~ vGone) ~
       (notifPlaceholder <~ vGone)
   }
 
   def loading(implicit rootView: View): Ui[_] = {
     (listView <~ vGone) ~
-      (progressBar <~ vVisible) ~
+      (mainProgressWheel <~ vVisible) ~
       (notifPlaceholder <~ vGone)
   }
 
   def adapter[BA <: BaseAdapter](baseAdapter: BaseAdapter)(implicit rootView: View): Ui[_] = {
     (listView <~ vVisible) ~
       (listView <~ ListViewTweaks.lvAdapter(baseAdapter)) ~
-      (progressBar <~ vGone) ~
+      (mainProgressWheel <~ vGone) ~
       (notifPlaceholder <~ vGone)
   }
 
   def empty(implicit rootView: View): Ui[_] = {
     (listView <~ vGone) ~
-      (progressBar <~ vGone) ~
+      (mainProgressWheel <~ vGone) ~
       (notifPlaceholder <~ vVisible) ~
       (btn <~ vGone) ~
       (msg <~ tvText(resGetString(R.string.empty)))
@@ -97,7 +106,7 @@ trait CommonFragmentComposer extends IdGeneration {
 
   def failed(implicit rootView: View): Ui[_] = {
     (listView <~ vGone) ~
-      (progressBar <~ vGone) ~
+      (mainProgressWheel <~ vGone) ~
       (notifPlaceholder <~ vVisible) ~
       (btn <~ vVisible) ~
       (msg <~ tvText(resGetString(R.string.error)))
@@ -108,6 +117,20 @@ trait CommonFragmentComposer extends IdGeneration {
       case 0 => empty
       case _ => adapter(baseAdapter)
     }
+
+  def pageLoading(implicit rootView: View): Ui[_] = {
+    (listView <~ vVisible) ~
+      (mainProgressWheel <~ vGone) ~
+      (notifPlaceholder <~ vGone) ~
+      (listViewProgressWheel <~ vVisible)
+  }
+
+  def pageLoadingDone(implicit rootView: View): Ui[_] = {
+    (listView <~ vVisible) ~
+      (mainProgressWheel <~ vGone) ~
+      (notifPlaceholder <~ vGone) ~
+      (listViewProgressWheel <~ vGone)
+  }
 
   def onScroll(up: => Unit)(down: => Unit)(implicit rootView: View): Ui[_] =
     listView <~ Tweak[ListView](_.setOnScrollListener(new OnScrollListener {

@@ -17,4 +17,5 @@ object Versions {
   val prettytimeV = "4.0.1.Final"
   val parse = "1+"
   val parseBolts = "1+"
+  val materialProgressWheel = "1.7"
 }

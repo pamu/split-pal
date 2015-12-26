@@ -1,5 +1,6 @@
 import Libraries.android._
 import Libraries.macroid._
+import Libraries.materialProgressWheel._
 import Libraries.playServices._
 import Libraries.apacheCommons._
 import Libraries.json._
@@ -42,6 +43,7 @@ libraryDependencies ++= Seq(
   aar(androidDesign),
   aar(macroidExtras),
   aar(playServicesBase),
+  aar(materialProgressWheel),
   apacheCommonsLang,
   json4s,
   picasso,

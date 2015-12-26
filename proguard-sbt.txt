@@ -117,15 +117,21 @@
 # view res/layout/design_navigation_menu.xml #generated:17
 -keep class android.support.design.internal.NavigationMenuView { <init>(...); }
 
-# view res/layout/fragment_layoutut.xml #generated:3
+# view res/layout/main_layout.xml #generated:8
+-keep class android.support.design.widget.AppBarLayout { <init>(...); }
+
+# view res/layout/fragment_layout.xml #generated:2
 -keep class android.support.design.widget.CoordinatorLayout { <init>(...); }
 
-# view res/layout/fragment_layout.xmlml #generated:55
+# view res/layout/fragment_layout.xml #generated:72
 -keep class android.support.design.widget.FloatingActionButton { <init>(...); }
 
 # view res/layout/design_layout_snackbar.xml #generated:18
 # view sw600dp-v13/res/layout-sw600dp-v13/design_layout_snackbar.xml #generated:18
 -keep class android.support.design.widget.Snackbar$SnackbarLayout { <init>(...); }
+
+# view res/layout/main_layout.xml #generated:32
+-keep class android.support.v4.view.ViewPager { <init>(...); }
 
 # view res/layout/abc_alert_dialog_material.xml #generated:75
 -keep class android.support.v4.widget.NestedScrollView { <init>(...); }
@@ -179,6 +185,7 @@
 -keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
 
 # view res/layout/abc_screen_toolbar.xml #generated:36
+# view res/layout/main_layout.xml #generated:15
 -keep class android.support.v7.widget.Toolbar { <init>(...); }
 
 # view res/layout/abc_screen_simple.xml #generated:25
@@ -187,6 +194,12 @@
 
 # view AndroidManifest.xml #generated:22
 -keep class android.test.InstrumentationTestRunner { <init>(...); }
+
+# view AndroidManifest.xml #generated:9
+-keep class com.rxbytes.splitpal.app.SplitPay { <init>(...); }
+
+# view res/layout/main_layout.xml #generated:25
+-keep class com.rxbytes.splitpal.ui.commons.SlidingTabLayout { <init>(...); }
 
 # view AndroidManifest.xml #generated:10
 -keep class com.rxbytes.splitpal.ui.login.LoginActivity { <init>(...); }

@@ -82,6 +82,10 @@ object Libraries {
     lazy val parseBolts = "com.parse.bolts" % "bolts-android" % Versions.parseBolts
   }
 
+  object materialProgressWheel {
+    lazy val materialProgressWheel = "com.pnikosis" % "materialish-progress" % Versions.materialProgressWheel
+  }
+
   object test {
     lazy val specs2 = "org.specs2" %% "specs2-core" % Versions.specs2V % "test"
     lazy val androidTest = "com.google.android" % "android" % "4.1.1.4" % "test"

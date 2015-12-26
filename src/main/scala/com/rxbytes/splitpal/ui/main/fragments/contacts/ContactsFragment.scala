@@ -24,6 +24,8 @@ class ContactsFragment
 
   Log.d(LOG_TAG, "Contacts Fragment created")
 
+  val limit = 10
+
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
 
     /**
@@ -44,12 +46,14 @@ class ContactsFragment
         fabActionButton.foreach(Snackbar.make(_, "Add new Contact", Snackbar.LENGTH_LONG).show())
       }
     })
-    runUi(init ~ fetchContacts)
+    runUi(init ~ fetchContacts(limit, 0))
     view
   }
 
-  def fetchContacts(implicit rootView: View): Ui[_] = {
-    contactsAsync mapUi { contacts =>
+  var currentPage = 0
+
+  def fetchContacts(limit: Int, offset: Int)(implicit rootView: View): Ui[_] = {
+    contactsAsync(limit, offset) mapUi { contacts =>
       reloadList(new ContactsListAdapter(contacts)(contact => Unit))
     } recoverUi { case ex =>
       Log.e(LOG_TAG, ex.getMessage)
