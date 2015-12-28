@@ -46,13 +46,13 @@ class ContactsFragment
         fabActionButton.foreach(Snackbar.make(_, "Add new Contact", Snackbar.LENGTH_LONG).show())
       }
     })
-    runUi(init ~ fetchContacts(limit, 0))
+    runUi(init ~ fetchPage(limit, 0))
     view
   }
 
   var currentPage = 0
 
-  def fetchContacts(limit: Int, offset: Int)(implicit rootView: View): Ui[_] = {
+  def fetchPage(limit: Int, offset: Int)(implicit rootView: View): Ui[_] = {
     contactsAsync(limit, offset) mapUi { contacts =>
       reloadList(new ContactsListAdapter(contacts)(contact => Unit))
     } recoverUi { case ex =>
