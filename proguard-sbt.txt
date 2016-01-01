@@ -123,14 +123,14 @@
 # view res/layout/fragment_layout.xml #generated:2
 -keep class android.support.design.widget.CoordinatorLayout { <init>(...); }
 
-# view res/layout/fragment_layout.xml #generated:72
+# view res/layout/fragment_layout.xml #generated:90
 -keep class android.support.design.widget.FloatingActionButton { <init>(...); }
 
 # view res/layout/design_layout_snackbar.xml #generated:18
 # view sw600dp-v13/res/layout-sw600dp-v13/design_layout_snackbar.xml #generated:18
 -keep class android.support.design.widget.Snackbar$SnackbarLayout { <init>(...); }
 
-# view res/layout/main_layout.xml #generated:32
+# view res/layout/main_layout.xml #generated:25
 -keep class android.support.v4.view.ViewPager { <init>(...); }
 
 # view res/layout/abc_alert_dialog_material.xml #generated:75
@@ -192,13 +192,20 @@
 # view res/layout/abc_screen_simple_overlay_action_mode.xml #generated:32
 -keep class android.support.v7.widget.ViewStubCompat { <init>(...); }
 
-# view AndroidManifest.xml #generated:22
+# view AndroidManifest.xml #generated:25
 -keep class android.test.InstrumentationTestRunner { <init>(...); }
+
+# view res/layout/fragment_layout.xml #generated:26
+# view res/layout/fragment_layout.xml #generated:51
+-keep class com.pnikosis.materialishprogress.ProgressWheel { <init>(...); }
 
 # view AndroidManifest.xml #generated:9
 -keep class com.rxbytes.splitpal.app.SplitPay { <init>(...); }
 
-# view res/layout/main_layout.xml #generated:25
+# view AndroidManifest.xml #generated:19
+-keep class com.rxbytes.splitpal.services.SyncService { <init>(...); }
+
+# view res/layout/main_layout.xml #generated:31
 -keep class com.rxbytes.splitpal.ui.commons.SlidingTabLayout { <init>(...); }
 
 # view AndroidManifest.xml #generated:10
