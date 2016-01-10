@@ -12,4 +12,9 @@ class AddEventActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState)
   }
 
+  override def onDestroy(): Unit = {
+    super.onDestroy()
+
+  }
+
 }
