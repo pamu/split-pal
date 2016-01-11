@@ -10,6 +10,7 @@ import Libraries.graphics._
 import Libraries.test._
 import android.Keys._
 import android.PromptPasswordsSigningConfig
+import Libraries.smartTabLayout._
 
 android.Plugin.androidBuild
 
@@ -44,6 +45,7 @@ libraryDependencies ++= Seq(
   aar(macroidExtras),
   aar(playServicesBase),
   aar(materialProgressWheel),
+  arr(smartTabLayout),
   apacheCommonsLang,
   json4s,
   picasso,

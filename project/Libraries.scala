@@ -86,6 +86,10 @@ object Libraries {
     lazy val materialProgressWheel = "com.pnikosis" % "materialish-progress" % Versions.materialProgressWheel
   }
 
+  object smartTabLayout {
+    lazy val smartTabLayout = "com.ogaclejapan.smarttablayout" % "library" % Versions.smartTabLayout
+  }
+
   object test {
     lazy val specs2 = "org.specs2" %% "specs2-core" % Versions.specs2V % "test"
     lazy val androidTest = "com.google.android" % "android" % "4.1.1.4" % "test"

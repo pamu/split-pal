@@ -18,4 +18,5 @@ object Versions {
   val parse = "1+"
   val parseBolts = "1+"
   val materialProgressWheel = "1.7"
+  val smartTabLayout = "1.6.0"
 }

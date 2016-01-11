@@ -22,6 +22,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    </android.support.v4.view.ViewPager>
 
     <com.rxbytes.splitpal.ui.commons.SlidingTabLayout
             android:id="@+id/sliding_tab_layout"
@@ -29,11 +34,5 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary">
     </com.rxbytes.splitpal.ui.commons.SlidingTabLayout>
-
-    <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-    </android.support.v4.view.ViewPager>
 
 </LinearLayout>
