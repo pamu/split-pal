@@ -45,7 +45,7 @@ libraryDependencies ++= Seq(
   aar(macroidExtras),
   aar(playServicesBase),
   aar(materialProgressWheel),
-  arr(smartTabLayout),
+  aar(smartTabLayout),
   apacheCommonsLang,
   json4s,
   picasso,
