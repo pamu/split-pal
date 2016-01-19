@@ -4,6 +4,7 @@ import android.app.Application
 import com.fortysevendeg.macroid.extras.ResourcesExtras._
 import com.parse.Parse
 import com.rxbytes.splitpal.R
+import com.rxbytes.splitpal.services.SyncService
 import macroid.ContextWrapper
 
 /**
@@ -20,6 +21,8 @@ class SplitPay
     Parse.initialize(getApplicationContext,
       resGetString(R.string.parse_app_id),
       resGetString(R.string.parse_client_key))
+
+    SyncService.startService
 
   }
 
