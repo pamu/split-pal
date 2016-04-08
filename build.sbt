@@ -72,4 +72,4 @@ useProguard in Android := true
 
 proguardOptions in Android ++= Settings.proguardCommons
 
-proguardCache in Android := Seq.empty
+//proguardCache in Android := Seq.empty
