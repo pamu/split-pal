@@ -54,8 +54,7 @@ libraryDependencies ++= Seq(
   parseBolts,
   specs2,
   mockito,
-  androidTest,
-  compilerPlugin(Libraries.wartRemover))
+  androidTest)
 
 apkSigningConfig in Android := Option(
   PromptPasswordsSigningConfig(

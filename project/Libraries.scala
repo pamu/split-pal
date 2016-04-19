@@ -7,7 +7,6 @@ object Libraries {
   def onTest(dep: ModuleID): ModuleID = dep % "test"
 
   //Plugins:
-  lazy val wartRemover = "org.brianmckenna" %% "wartremover" % Versions.wartremoverV
   lazy val androidSDKPlugin = "com.hanhuy.sbt" % "android-sdk-plugin" % Versions.androidPluginV
 
   object scala {
