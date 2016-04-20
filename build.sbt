@@ -72,3 +72,6 @@ useProguard in Android := true
 proguardOptions in Android ++= Settings.proguardCommons
 
 //proguardCache in Android := Seq.empty
+transitiveAndroidLibs in Android := true
+
+useProguardInDebug in Android := true
